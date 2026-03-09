@@ -1,0 +1,21 @@
+---
+const currentYear = new Date().getFullYear();
+const githubUrl = "https://github.com/iago-fernandez";
+const linkedinUrl = "https://linkedin.com/in/iagofernandez-dev";
+---
+
+<footer class="mt-20 border-t border-gray-200 bg-gray-50 py-12">
+    <div class="mx-auto max-w-4xl px-6 flex flex-col items-center justify-between sm:flex-row">
+        <p class="text-sm text-gray-500">
+            &copy; {currentYear} Iago Fernandez. All rights reserved.
+        </p>
+        <div class="mt-4 flex gap-x-6 sm:mt-0">
+            <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900">
+                GitHub
+            </a>
+            <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900">
+                LinkedIn
+            </a>
+        </div>
+    </div>
+</footer>
