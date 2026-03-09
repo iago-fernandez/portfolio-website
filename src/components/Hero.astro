@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
+import profileImage from '../assets/profile.png';
+
 const githubUrl = "https://github.com/iago-fernandez";
-const linkedinUrl = "https://linkedin.com/in/iagofernandez-dev";
+const linkedinUrl = "https://linkedin.com/in/iago-fernandez-dev";
 const cvUrl = "/resume.pdf";
 ---
 
@@ -10,7 +13,7 @@ const cvUrl = "/resume.pdf";
             Iago Fernandez
         </h1>
         <h2 class="mt-4 text-2xl font-medium text-gray-600 sm:text-3xl">
-            BSc Mathematics & BSc Computer Engineering
+            Dual BSc in Mathematics & Computer Engineering
         </h2>
         <div class="mt-6 max-w-lg animation-delay-200">
             <p class="text-lg leading-relaxed text-gray-600">
@@ -37,8 +40,15 @@ const cvUrl = "/resume.pdf";
         </div>
     </div>
     <div class="flex-1 flex justify-center sm:justify-end animate-fade-in-up animation-delay-200">
-        <div class="flex h-64 w-64 items-center justify-center overflow-hidden rounded-full border border-gray-300 bg-gray-200 text-gray-400 shadow-inner sm:h-80 sm:w-80">
-            <span class="text-sm font-medium">Image Placeholder</span>
+        <div class="relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-full border border-gray-200 bg-gray-50 shadow-sm sm:h-80 sm:w-80">
+            <Image 
+                src={profileImage} 
+                alt="Iago Fernandez" 
+                class="h-full w-full object-cover"
+                loading="eager"
+                width={320}
+                height={320}
+            />
         </div>
     </div>
 </section>
