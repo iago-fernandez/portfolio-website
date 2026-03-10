@@ -1,0 +1,51 @@
+---
+const education = [
+    {
+        institution: 'Universidade de Santiago de Compostela',
+        degree: 'Dual BSc in Mathematics & Computer Engineering',
+        years: '2020 - Present'
+    },
+    {
+        institution: 'University of Łódź',
+        degree: 'Erasmus+ Exchange Program',
+        years: 'Autumn 2023 - Winter 2024'
+    }
+];
+---
+
+<section class="py-10 animate-fade-in-up">
+    <h2 class="mb-10 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        About Me & Technical Trajectory
+    </h2>
+    
+    <div class="grid gap-12 lg:grid-cols-3">
+        <div class="space-y-6 text-base leading-relaxed text-gray-600 lg:col-span-2">
+            <h3 class="text-xl font-bold text-gray-900">My Background</h3>
+            <p>
+                Hello! My name is Iago Fernández Perlo, and from a very young age, I have had a profound interest in computers, often dismantling and reassembling old PC hardware to understand how physical components interact. This early hands-on exploration sparked a passion that naturally led me toward the academic intersection of logic and systems engineering.
+            </p>
+            <p>
+                During my secondary education, I developed a strict foundation in algorithmic logic by actively participating in regional mathematical competitions, including the national Mathematical Olympiad and LigaMat. As I delved deeper into computer science, I quickly realized that achieving maximum efficiency required a solid understanding of the underlying mathematics. My trajectory is defined by this continuous search for optimal computational models and their low-level implementation.
+            </p>
+            <p>
+                To complement my focus on system architecture, I have proactively expanded my knowledge of network security. I completed specialized coursework through INCIBE and participate in university and regional Capture The Flag (CTF) events. While I treat these primarily as practical learning exercises, they provide invaluable hands-on experience in identifying vulnerabilities and understanding the critical importance of secure infrastructure design.
+            </p>
+            <p>
+                Currently, I am heavily focused on concurrent architectures, high-performance computing, and the intricate infrastructure required for AI. I thrive on challenges that demand minimizing temporal and spatial complexity in low-latency environments.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            <h3 class="text-xl font-bold text-gray-900">Academic Foundation</h3>
+            <div class="space-y-6">
+                {education.map(edu => (
+                    <div class="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+                        <p class="text-sm font-bold text-gray-900">{edu.institution}</p>
+                        <p class="mt-1 text-sm font-medium text-blue-600">{edu.degree}</p>
+                        <p class="mt-2 text-xs font-semibold text-gray-500">{edu.years}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
