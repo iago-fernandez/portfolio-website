@@ -1,22 +1,33 @@
 ---
+const currentPath = Astro.url.pathname;
+
 const navLinks = [
-    { name: 'About', url: '/#about' },
-    { name: 'Experience', url: '/#experience' },
-    { name: 'Projects', url: '/#projects' }
+    { name: 'About', url: '/about' },
+    { name: 'Experience', url: '/experience' },
+    { name: 'Projects', url: '/projects' }
 ];
+
+const isActive = (url: string) => {
+    return currentPath === url || currentPath === url + '/';
+};
 ---
 
-<header class="fixed top-0 z-50 w-full border-b border-gray-100 bg-gray-50/80 backdrop-blur-md">
-    <nav class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4" aria-label="Global">
-        <a href="/" class="text-lg font-bold tracking-tight text-gray-900">
-            IF.
+<header class="fixed top-0 z-50 w-full border-b border-gray-200 bg-white/90 backdrop-blur-lg shadow-sm">
+    <nav class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-12" aria-label="Global">
+        <a href="/" class="text-xl font-extrabold tracking-tighter text-gray-900 transition-colors hover:text-blue-600">
+            iago<span class="font-medium text-blue-600">fernandez</span>
         </a>
-        <div class="flex gap-x-6">
-            {navLinks.map((link) => (
-                <a href={link.url} class="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900">
-                    {link.name}
-                </a>
-            ))}
+        <div class="flex items-center gap-x-6">
+            <div class="hidden sm:flex gap-x-6">
+                {navLinks.map((link) => (
+                    <a 
+                        href={link.url} 
+                        class={`text-sm font-semibold transition-all hover:text-gray-900 ${isActive(link.url) ? 'text-gray-900 border-b-2 border-gray-900 pb-0.5' : 'text-gray-500'}`}
+                    >
+                        {link.name}
+                    </a>
+                ))}
+            </div>
         </div>
     </nav>
 </header>
