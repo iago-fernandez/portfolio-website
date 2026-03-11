@@ -12,12 +12,12 @@ const isActive = (url: string) => {
 };
 ---
 
-<header class="fixed top-0 z-50 w-full border-b border-zinc-200 bg-white/90 dark:border-zinc-700 dark:bg-zinc-800/90 backdrop-blur-lg shadow-sm dark:shadow-black/20 transition-colors duration-300">
+<header class="fixed top-0 z-50 w-full border-b border-zinc-200 bg-white/90 dark:border-zinc-800 dark:bg-zinc-900/90 backdrop-blur-lg shadow-sm dark:shadow-black/10 transition-colors duration-300">
     <nav class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-12" aria-label="Global">
         <a href="/" class="text-xl font-extrabold tracking-tighter text-zinc-900 dark:text-zinc-100 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             iago<span class="font-medium text-blue-600 dark:text-blue-400">fernandez</span>
         </a>
-        <div class="flex items-center gap-x-6">
+        <div class="flex items-center gap-x-4 sm:gap-x-6">
             <div class="hidden sm:flex gap-x-6">
                 {navLinks.map((link) => (
                     <a 
@@ -29,7 +29,7 @@ const isActive = (url: string) => {
                 ))}
             </div>
             
-            <button id="theme-toggle" type="button" class="rounded-lg p-2.5 text-sm text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Toggle Dark Mode">
+            <button id="theme-toggle" type="button" class="rounded-lg p-2.5 text-sm text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Toggle Dark Mode">
                 <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                 </svg>
@@ -37,8 +37,30 @@ const isActive = (url: string) => {
                     <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </button>
+
+            <button id="mobile-menu-toggle" type="button" class="sm:hidden rounded-lg p-2.5 text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Open main menu">
+                <svg id="menu-open-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <svg id="menu-close-icon" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
     </nav>
+
+    <div id="mobile-menu" class="hidden sm:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl">
+        <div class="space-y-1 px-6 pb-6 pt-4">
+            {navLinks.map((link) => (
+                <a 
+                    href={link.url} 
+                    class={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive(link.url) ? 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100' : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-100'}`}
+                >
+                    {link.name}
+                </a>
+            ))}
+        </div>
+    </div>
 </header>
 
 <script is:inline>
@@ -74,6 +96,29 @@ const isActive = (url: string) => {
         });
     };
 
-    initializeThemeToggle();
-    document.addEventListener('astro:page-load', initializeThemeToggle);
+    const initializeMobileMenu = () => {
+        const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+
+        if (!mobileMenuBtn || !mobileMenu || !menuOpenIcon || !menuCloseIcon) return;
+
+        if (mobileMenuBtn.dataset.initialized) return;
+        mobileMenuBtn.dataset.initialized = 'true';
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+        });
+    };
+
+    const initializeHeaderComponents = () => {
+        initializeThemeToggle();
+        initializeMobileMenu();
+    };
+
+    initializeHeaderComponents();
+    document.addEventListener('astro:page-load', initializeHeaderComponents);
 </script>
