@@ -59,16 +59,10 @@ const cvUrl = "/resume.pdf";
         let height = 0;
         let particles: Particle[] = [];
         const mouse = { x: -9999, y: -9999 };
-
-        const resize = () => {
-            width = canvas.width = container.offsetWidth;
-            height = canvas.height = container.offsetHeight;
-        };
-
-        resize();
+        let needsResize = true;
 
         const resizeObserver = new ResizeObserver(() => {
-            resize();
+            needsResize = true;
         });
         resizeObserver.observe(container);
 
@@ -83,6 +77,23 @@ const cvUrl = "/resume.pdf";
             mouse.y = -9999;
         });
 
+        container.addEventListener('touchstart', (e) => {
+            const rect = container.getBoundingClientRect();
+            mouse.x = e.touches[0].clientX - rect.left;
+            mouse.y = e.touches[0].clientY - rect.top;
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            const rect = container.getBoundingClientRect();
+            mouse.x = e.touches[0].clientX - rect.left;
+            mouse.y = e.touches[0].clientY - rect.top;
+        }, { passive: true });
+
+        container.addEventListener('touchend', () => {
+            mouse.x = -9999;
+            mouse.y = -9999;
+        });
+
         class Particle {
             x: number;
             y: number;
@@ -90,9 +101,9 @@ const cvUrl = "/resume.pdf";
             vy: number;
             size: number;
 
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
+            constructor(isNew = false) {
+                this.x = isNew ? Math.random() * width : Math.random() * (container.offsetWidth || 1000);
+                this.y = isNew ? Math.random() * height : Math.random() * (container.offsetHeight || 1000);
                 this.vx = (Math.random() - 0.5) * 0.6;
                 this.vy = (Math.random() - 0.5) * 0.6;
                 this.size = Math.random() * 2.5 + 1;
@@ -121,10 +132,32 @@ const cvUrl = "/resume.pdf";
             }
         }
 
-        particles = Array.from({ length: 100 }, () => new Particle());
-
         const animate = () => {
             if(!ctx) return;
+
+            if (needsResize) {
+                width = container.offsetWidth;
+                height = container.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+
+                const targetCount = Math.min(100, Math.max(50, Math.floor(width / 15)));
+
+                if (particles.length > targetCount) {
+                    particles.splice(targetCount);
+                }
+                while (particles.length < targetCount) {
+                    particles.push(new Particle(true));
+                }
+
+                particles.forEach(p => {
+                    if (p.x > width) p.x = Math.random() * width;
+                    if (p.y > height) p.y = Math.random() * height;
+                });
+
+                needsResize = false;
+            }
+
             ctx.clearRect(0, 0, width, height);
             
             for (let i = 0; i < particles.length; i++) {
