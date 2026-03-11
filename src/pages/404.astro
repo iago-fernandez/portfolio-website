@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 Not Found | Iago Fernandez" description="The requested directory does not exist.">
+    <section class="flex flex-grow flex-col items-center justify-center px-6 py-24 sm:py-32 lg:px-8">
+        <div class="text-center animate-fade-in-up">
+            <p class="text-base font-semibold text-blue-600 dark:text-blue-400">404</p>
+            <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+                Directory not found
+            </h1>
+            <p class="mt-6 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+                The requested system path does not exist in the current architecture.
+            </p>
+            <div class="mt-10 flex items-center justify-center gap-x-6">
+                <a href="/" class="inline-flex items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-6 py-3 text-sm font-medium text-zinc-900 dark:text-zinc-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:shadow-lg active:translate-y-0">
+                    Return to homepage
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>
