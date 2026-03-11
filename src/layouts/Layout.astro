@@ -22,9 +22,19 @@ const { title, description } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
         <ViewTransitions />
+        <script is:inline>
+            const setTheme = () => {
+                const preference = typeof localStorage !== 'undefined' && localStorage.getItem('theme') 
+                    ? localStorage.getItem('theme') 
+                    : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.classList[preference === 'dark' ? 'add' : 'remove']('dark');
+            };
+            setTheme();
+            document.addEventListener('astro:after-swap', setTheme);
+        </script>
     </head>
-    <body class="bg-gray-50 text-gray-900 antialiased selection:bg-blue-600 selection:text-white pt-16 flex flex-col min-h-screen relative overflow-y-scroll">
-        <div class="pointer-events-none fixed inset-0 z-[-1] bg-grid-pattern opacity-50 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] -webkit-[mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]"></div>
+    <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-blue-600 selection:text-white dark:bg-zinc-900 dark:text-zinc-300 transition-colors duration-300 pt-16 flex flex-col min-h-screen relative overflow-y-scroll">
+        <div class="pointer-events-none fixed inset-0 z-[-1] bg-grid-pattern opacity-50 dark:opacity-20 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] -webkit-[mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]"></div>
         
         <Header />
         <div class="flex-grow flex flex-col">
