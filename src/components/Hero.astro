@@ -8,37 +8,37 @@ const cvUrl = "/resume.pdf";
 ---
 
 <section id="hero-container" class="relative w-full overflow-hidden pt-8 pb-20">
-    <canvas id="network-canvas" class="absolute inset-0 z-0 h-full w-full opacity-80 pointer-events-none"></canvas>
+    <canvas id="network-canvas" class="absolute inset-0 z-0 h-full w-full opacity-80 pointer-events-none dark:opacity-70 transition-opacity duration-300"></canvas>
 
     <div class="mx-auto max-w-7xl px-6 sm:px-12 relative z-10">
-        <div class="grid min-h-[80vh] grid-cols-1 items-center gap-y-12 gap-x-8 lg:grid-cols-12">
+        <div class="grid min-h-[85vh] grid-cols-1 items-center gap-y-12 gap-x-8 lg:grid-cols-12">
             <div class="animate-fade-in-up lg:col-span-10 pr-16">
-                <h1 class="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
+                <h1 class="text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-6xl lg:text-7xl transition-colors duration-300">
                     Iago Fernández Perlo
                 </h1>
-                <h2 class="mt-4 text-2xl font-semibold text-gray-700 sm:text-3xl whitespace-nowrap">
+                <h2 class="mt-4 text-2xl font-semibold text-zinc-700 dark:text-zinc-300 sm:text-3xl whitespace-nowrap transition-colors duration-300">
                     Dual BSc in Mathematics & Computer Engineering
                 </h2>
                 <div class="mt-6 max-w-3xl animation-delay-200">
-                    <p class="text-lg leading-relaxed text-gray-600">
+                    <p class="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
                         Specializing in high-performance computing, concurrent architectures, and AI infrastructure. Focused on maximizing temporal and spatial efficiency in low-level systems.
                     </p>
                 </div>
                 <div class="mt-10 flex flex-wrap gap-4 animation-delay-400">
-                    <a href={cvUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-gray-800 hover:shadow-lg active:translate-y-0">
+                    <a href={cvUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md bg-zinc-900 px-6 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 hover:shadow-lg active:translate-y-0">
                         View Curriculum
                     </a>
-                    <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-3 text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:bg-gray-50 hover:shadow-lg active:translate-y-0">
+                    <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-6 py-3 text-sm font-medium text-zinc-900 dark:text-zinc-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:shadow-lg active:translate-y-0">
                         GitHub
                     </a>
-                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-3 text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:bg-gray-50 hover:shadow-lg active:translate-y-0">
+                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-6 py-3 text-sm font-medium text-zinc-900 dark:text-zinc-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:shadow-lg active:translate-y-0">
                         LinkedIn
                     </a>
                 </div>
             </div>
             
             <div class="flex justify-center animate-fade-in-up animation-delay-200 lg:col-span-2 lg:justify-end">
-                <div class="relative flex h-64 w-64 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-white shadow-md transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-900/20 sm:h-80 sm:w-80">
+                <div class="relative flex h-64 w-64 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white dark:border-zinc-600 bg-white dark:bg-zinc-600 shadow-md transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-900/20 dark:hover:shadow-blue-500/20 sm:h-80 sm:w-80">
                     <Image src={profileImage} alt="Iago Fernández Perlo" class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105" loading="eager" width={320} height={320}/>
                 </div>
             </div>
@@ -113,7 +113,8 @@ const cvUrl = "/resume.pdf";
 
             draw() {
                 if(!ctx) return;
-                ctx.fillStyle = 'rgba(37, 99, 235, 0.35)';
+                const isDark = document.documentElement.classList.contains('dark');
+                ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.65)' : 'rgba(37, 99, 235, 0.45)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -134,10 +135,12 @@ const cvUrl = "/resume.pdf";
                 const dyMouse = mouse.y - particles[i].y;
                 const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
                 
+                const isDark = document.documentElement.classList.contains('dark');
+
                 if (distMouse < 220) {
-                    const alpha = Math.max(0, 0.4 - distMouse / 550);
-                    ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-                    ctx.lineWidth = 2.0;
+                    const alpha = Math.max(0, 0.45 - distMouse / 550);
+                    ctx.strokeStyle = isDark ? `rgba(96, 165, 250, ${alpha})` : `rgba(37, 99, 235, ${alpha})`;
+                    ctx.lineWidth = isDark ? 1.5 : 2.0;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(mouse.x, mouse.y);
@@ -150,9 +153,9 @@ const cvUrl = "/resume.pdf";
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < 150) {
-                        const alpha = Math.max(0, 0.3 - distance / 500);
-                        ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-                        ctx.lineWidth = 1.5;
+                        const alpha = Math.max(0, 0.35 - distance / 500);
+                        ctx.strokeStyle = isDark ? `rgba(96, 165, 250, ${alpha * 0.9})` : `rgba(37, 99, 235, ${alpha})`;
+                        ctx.lineWidth = isDark ? 1.0 : 1.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
