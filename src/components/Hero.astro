@@ -12,15 +12,15 @@ const cvUrl = "/resume.pdf";
 
     <div class="mx-auto max-w-7xl px-6 sm:px-12 relative z-10">
         <div class="grid min-h-[85vh] grid-cols-1 items-center gap-y-12 gap-x-8 lg:grid-cols-12">
-            <div class="animate-fade-in-up lg:col-span-10 pr-16">
-                <h1 class="text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-6xl lg:text-7xl transition-colors duration-300">
+            <div class="order-2 min-w-0 animate-fade-in-up lg:order-1 lg:col-span-7 xl:col-span-8 lg:pr-8">
+                <h1 class="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl lg:text-6xl xl:text-7xl transition-colors duration-300">
                     Iago Fernández Perlo
                 </h1>
-                <h2 class="mt-4 text-2xl font-semibold text-zinc-700 dark:text-zinc-300 sm:text-3xl whitespace-nowrap transition-colors duration-300">
+                <h2 class="mt-4 text-xl font-semibold text-zinc-700 dark:text-zinc-300 sm:text-2xl xl:text-3xl transition-colors duration-300">
                     Dual BSc in Mathematics & Computer Engineering
                 </h2>
                 <div class="mt-6 max-w-3xl animation-delay-200">
-                    <p class="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+                    <p class="text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg transition-colors duration-300">
                         Specializing in high-performance computing, concurrent architectures, and AI infrastructure. Focused on maximizing temporal and spatial efficiency in low-level systems.
                     </p>
                 </div>
@@ -37,8 +37,8 @@ const cvUrl = "/resume.pdf";
                 </div>
             </div>
             
-            <div class="flex justify-center animate-fade-in-up animation-delay-200 lg:col-span-2 lg:justify-end">
-                <div class="relative flex h-64 w-64 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white dark:border-zinc-600 bg-white dark:bg-zinc-600 shadow-md transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-900/20 dark:hover:shadow-blue-500/20 sm:h-80 sm:w-80">
+            <div class="order-1 flex justify-center animate-fade-in-up animation-delay-200 lg:order-2 lg:col-span-5 xl:col-span-4 lg:justify-end">
+                <div class="relative flex h-56 w-56 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white dark:border-zinc-700 bg-white dark:bg-zinc-700 shadow-md transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-900/20 dark:hover:shadow-blue-500/10 sm:h-72 sm:w-72 lg:h-80 lg:w-80">
                     <Image src={profileImage} alt="Iago Fernández Perlo" class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105" loading="eager" width={320} height={320}/>
                 </div>
             </div>
@@ -59,16 +59,10 @@ const cvUrl = "/resume.pdf";
         let height = 0;
         let particles: Particle[] = [];
         const mouse = { x: -9999, y: -9999 };
-
-        const resize = () => {
-            width = canvas.width = container.offsetWidth;
-            height = canvas.height = container.offsetHeight;
-        };
-
-        resize();
+        let needsResize = true;
 
         const resizeObserver = new ResizeObserver(() => {
-            resize();
+            needsResize = true;
         });
         resizeObserver.observe(container);
 
@@ -83,6 +77,23 @@ const cvUrl = "/resume.pdf";
             mouse.y = -9999;
         });
 
+        container.addEventListener('touchstart', (e) => {
+            const rect = container.getBoundingClientRect();
+            mouse.x = e.touches[0].clientX - rect.left;
+            mouse.y = e.touches[0].clientY - rect.top;
+        }, { passive: true });
+
+        container.addEventListener('touchmove', (e) => {
+            const rect = container.getBoundingClientRect();
+            mouse.x = e.touches[0].clientX - rect.left;
+            mouse.y = e.touches[0].clientY - rect.top;
+        }, { passive: true });
+
+        container.addEventListener('touchend', () => {
+            mouse.x = -9999;
+            mouse.y = -9999;
+        });
+
         class Particle {
             x: number;
             y: number;
@@ -90,9 +101,9 @@ const cvUrl = "/resume.pdf";
             vy: number;
             size: number;
 
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
+            constructor(isNew = false) {
+                this.x = isNew ? Math.random() * width : Math.random() * (container.offsetWidth || 1000);
+                this.y = isNew ? Math.random() * height : Math.random() * (container.offsetHeight || 1000);
                 this.vx = (Math.random() - 0.5) * 0.6;
                 this.vy = (Math.random() - 0.5) * 0.6;
                 this.size = Math.random() * 2.5 + 1;
@@ -114,17 +125,39 @@ const cvUrl = "/resume.pdf";
             draw() {
                 if(!ctx) return;
                 const isDark = document.documentElement.classList.contains('dark');
-                ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.65)' : 'rgba(37, 99, 235, 0.45)';
+                ctx.fillStyle = isDark ? 'rgba(191, 219, 254, 0.45)' : 'rgba(37, 99, 235, 0.45)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        particles = Array.from({ length: 100 }, () => new Particle());
-
         const animate = () => {
             if(!ctx) return;
+
+            if (needsResize) {
+                width = container.offsetWidth;
+                height = container.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+
+                const targetCount = Math.min(100, Math.max(50, Math.floor(width / 15)));
+
+                if (particles.length > targetCount) {
+                    particles.splice(targetCount);
+                }
+                while (particles.length < targetCount) {
+                    particles.push(new Particle(true));
+                }
+
+                particles.forEach(p => {
+                    if (p.x > width) p.x = Math.random() * width;
+                    if (p.y > height) p.y = Math.random() * height;
+                });
+
+                needsResize = false;
+            }
+
             ctx.clearRect(0, 0, width, height);
             
             for (let i = 0; i < particles.length; i++) {
@@ -139,7 +172,7 @@ const cvUrl = "/resume.pdf";
 
                 if (distMouse < 220) {
                     const alpha = Math.max(0, 0.45 - distMouse / 550);
-                    ctx.strokeStyle = isDark ? `rgba(96, 165, 250, ${alpha})` : `rgba(37, 99, 235, ${alpha})`;
+                    ctx.strokeStyle = isDark ? `rgba(191, 219, 254, ${alpha * 0.9})` : `rgba(37, 99, 235, ${alpha})`;
                     ctx.lineWidth = isDark ? 1.5 : 2.0;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
@@ -154,7 +187,7 @@ const cvUrl = "/resume.pdf";
 
                     if (distance < 150) {
                         const alpha = Math.max(0, 0.35 - distance / 500);
-                        ctx.strokeStyle = isDark ? `rgba(96, 165, 250, ${alpha * 0.9})` : `rgba(37, 99, 235, ${alpha})`;
+                        ctx.strokeStyle = isDark ? `rgba(191, 219, 254, ${alpha * 0.8})` : `rgba(37, 99, 235, ${alpha})`;
                         ctx.lineWidth = isDark ? 1.0 : 1.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
