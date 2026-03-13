@@ -9,7 +9,7 @@
     </div>
 
     <div class="w-full max-w-2xl rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-8 sm:p-10 shadow-sm transition-all hover:shadow-md dark:hover:shadow-blue-900/10 duration-300">
-        <form id="contact-form" class="space-y-6">
+        <form id="contact-form" class="space-y-6" novalidate autocomplete="off">
             <div>
                 <label for="email" class="block text-sm font-bold text-gray-900 dark:text-zinc-100 transition-colors duration-300">
                     Email Address
@@ -61,13 +61,26 @@
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
-                submitBtn.disabled = true;
-                if (btnText) btnText.classList.add('hidden');
-                if (btnSpinner) btnSpinner.classList.remove('hidden');
                 if (formStatus) {
                     formStatus.classList.add('hidden');
                     formStatus.className = 'hidden rounded-md p-4 text-sm font-bold transition-all duration-300';
                 }
+
+                if (!form.checkValidity()) {
+                    const emailInput = document.getElementById('email') as HTMLInputElement;
+                    if (!emailInput.validity.valid) {
+                        formStatus.textContent = 'Please provide a valid email address.';
+                    } else {
+                        formStatus.textContent = 'Please fill out all required fields.';
+                    }
+                    formStatus.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200', 'dark:bg-red-900/30', 'dark:text-red-300', 'dark:border-red-800');
+                    formStatus.classList.remove('hidden');
+                    return;
+                }
+                
+                submitBtn.disabled = true;
+                if (btnText) btnText.classList.add('hidden');
+                if (btnSpinner) btnSpinner.classList.remove('hidden');
 
                 const formData = new FormData(form);
 
