@@ -20,6 +20,12 @@ const directory = [
         description: 'High-performance systems, concurrent computing, and infrastructure architectures.',
         link: '/projects',
         icon: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5'
+    },
+    {
+        title: 'Contact',
+        description: 'Direct communication channel for professional opportunities and inquiries.',
+        link: '/contact',
+        icon: 'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
     }
 ];
 ---
@@ -30,11 +36,11 @@ const directory = [
     <div class="w-full border-t border-zinc-200 dark:border-zinc-700 transition-colors duration-300"></div>
     
     <section class="w-full pb-24 pt-16">
-        <div class="mx-auto max-w-6xl px-6 sm:px-12 animate-fade-in-up animation-delay-400">
+        <div class="mx-auto max-w-7xl px-6 sm:px-12 animate-fade-in-up animation-delay-400">
             <h3 class="mb-10 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
                 System Directory
             </h3>
-            <div class="grid gap-6 sm:grid-cols-3">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {directory.map((item) => (
                     <a href={item.link} class="group relative flex flex-col justify-between rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 dark:hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-900/5 dark:hover:shadow-blue-900/10">
                         <div>
