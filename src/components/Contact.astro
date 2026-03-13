@@ -29,6 +29,8 @@
                 <textarea name="message" id="message" rows="6" required class="mt-2 block w-full resize-none rounded-md border border-gray-300 dark:border-zinc-600 bg-transparent px-4 py-3 text-sm text-gray-900 dark:text-zinc-100 placeholder-gray-400 dark:placeholder-zinc-500 outline-none transition-all focus:border-gray-900 focus:ring-1 focus:ring-gray-900 dark:focus:border-zinc-300 dark:focus:ring-zinc-300" placeholder="Hello Iago, ..."></textarea>
             </div>
             
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAACqH2g4WiqJ-5q1M" data-size="invisible"></div>
+
             <div id="form-status" class="hidden rounded-md p-4 text-sm font-bold transition-all duration-300"></div>
 
             <button type="submit" id="submit-btn" class="mt-4 inline-flex w-full items-center justify-center rounded-md bg-zinc-900 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 hover:shadow-lg active:translate-y-0 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed">
@@ -48,6 +50,8 @@
         All submitted information is securely processed and maintained with strict confidentiality.
     </p>
 </section>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script>
     document.addEventListener('astro:page-load', () => {
@@ -102,7 +106,7 @@
                     }
                 } catch (error) {
                     if (formStatus) {
-                        formStatus.textContent = 'There was an error sending your message. Please try again later.';
+                        formStatus.textContent = 'There was an error processing your security token. Please try again later.';
                         formStatus.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200', 'dark:bg-red-900/30', 'dark:text-red-300', 'dark:border-red-800');
                         formStatus.classList.remove('hidden');
                     }
@@ -110,6 +114,10 @@
                     submitBtn.disabled = false;
                     if (btnText) btnText.classList.remove('hidden');
                     if (btnSpinner) btnSpinner.classList.add('hidden');
+                    
+                    if (window.turnstile) {
+                        window.turnstile.reset();
+                    }
                 }
             });
         }
