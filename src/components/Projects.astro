@@ -12,42 +12,34 @@ const projects: ProjectData[] = [
     {
         title: 'Async Network Engine',
         category: 'High-Performance Systems',
-        description: 'A custom, low-latency network stack and asynchronous server architecture engineered in C.',
-        extendedDetails: 'Specifically utilizes epoll for maximizing I/O throughput and implements lock-free data structures to eliminate synchronization overhead. Features custom binary protocol parsing for efficient data transmission relevant to high-frequency systems.',
+        description: 'A custom, low-latency network stack engineered to bypass the overhead of standard abstractions.',
+        extendedDetails: 'This project demonstrates a deep understanding of kernel-level event notification. It utilizes epoll for maximizing I/O throughput and implements strict lock-free data structures to eliminate synchronization latency. The custom binary protocol parsing ensures highly efficient data transmission, a fundamental requirement for building ultra-low-latency financial systems.',
         technologies: ['C', 'epoll', 'Concurrency', 'Network Architecture'],
         githubUrl: 'https://github.com/iago-fernandez/async-network-engine'
     },
     {
         title: 'Bare-Metal Homelab & Internal Cloud',
         category: 'Infrastructure as Code',
-        description: 'Infrastructure as Code deployment for a self-hosted Homelab with strict internal routing isolation.',
-        extendedDetails: 'Orchestrates a containerized environment using Docker and Docker Compose, focusing on network security. Service isolation is strictly enforced; a reverse proxy manages internal routing, while remote access is exclusively established via a customized Wireguard tunnel to maintain boundaries against the public internet.',
+        description: 'Infrastructure deployment designed to simulate enterprise-grade environments and secure networking.',
+        extendedDetails: 'Provides a sandboxed environment for testing security architectures. Orchestrates a containerized ecosystem using Docker, focusing strictly on network isolation. A reverse proxy manages internal routing, while remote access is exclusively established via a customized Wireguard tunnel, ensuring practical experience with the exact zero-trust deployment models used in production AI infrastructure.',
         technologies: ['Shell', 'Docker', 'Networking', 'Wireguard'],
         githubUrl: 'https://github.com/iago-fernandez/homelab'
     },
     {
         title: '3D Game of Life on Toroidal Board',
         category: 'Concurrent Computing',
-        description: 'A modern, highly optimized implementation of Conway\'s Game of Life simulating a wrap-around board.',
-        extendedDetails: 'The simulation is rendered in two synchronized views. Focused on computational efficiency, maximizing temporal and spatial performance by optimizing the underlying matrix calculations for the distinct pixel-perfect 2D grid and the algorithmic complexity of the 3D torus visualization.',
+        description: 'A highly optimized simulation developed to push the limits of matrix calculation and memory contiguity.',
+        extendedDetails: 'Focused strictly on computational efficiency. It serves as a benchmark for parallelized code execution, maximizing temporal and spatial performance by optimizing the underlying matrix algorithms for a pixel-perfect 2D grid and the topological complexity of a 3D torus. These optimization principles are directly applicable to the spatial efficiency requirements of algorithmic trading.',
         technologies: ['C++', 'Algorithms', 'Optimization', 'Rendering'],
         githubUrl: 'https://github.com/iago-fernandez/3d-game-of-life'
     },
     {
         title: 'DFA Visualizer',
         category: 'Algorithmic Theory',
-        description: 'A mathematical tool to define Deterministic Finite Automata (DFAs), validate strings, and visualize the structure.',
-        extendedDetails: 'Renders both the static DFA definition and dynamic execution paths using Graphviz, providing clear visual insights into algorithmic execution and strict theoretical computation models.',
+        description: 'A mathematical tool created to bridge the gap between abstract automata theory and practical software execution.',
+        extendedDetails: 'Renders both the static Deterministic Finite Automata (DFA) definition and dynamic execution paths using Graphviz. It validates structural logic and provides a clear visual proof of algorithmic correctness against strict theoretical computation models.',
         technologies: ['Python', 'Automata Theory', 'Graphviz'],
         githubUrl: 'https://github.com/iago-fernandez/dfa-visualizer'
-    },
-    {
-        title: 'Engineering Portfolio',
-        category: 'Frontend Architecture',
-        description: 'A statically generated engineering portfolio and technical documentation hub.',
-        extendedDetails: 'Designed to showcase system architectures and software projects with a strict focus on build-time efficiency, zero-javascript progressive enhancement, and automated continuous deployment pipelines via Cloudflare Pages.',
-        technologies: ['Astro', 'Tailwind CSS', 'SSG', 'CI/CD'],
-        githubUrl: 'https://github.com/iago-fernandez/portfolio-website'
     }
 ];
 ---
@@ -58,7 +50,7 @@ const projects: ProjectData[] = [
     </h2>
     <div class="grid gap-8 sm:grid-cols-2 items-start">
         {projects.map((project) => (
-            <div class="flex flex-col rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm transition-all hover:-tranzinc-y-1 hover:shadow-lg dark:hover:shadow-blue-900/10">
+            <div class="flex flex-col rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-blue-900/10">
                 <div class="mb-4">
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 transition-colors duration-300">
                         {project.category}

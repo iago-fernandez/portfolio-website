@@ -3,15 +3,53 @@ const education = [
     {
         institution: 'Universidade de Santiago de Compostela',
         degree: 'Dual BSc in Mathematics & Computer Engineering',
-        years: '2020 - Present'
+        years: '2020 - 2027'
     },
     {
         institution: 'University of Łódź',
         degree: 'Erasmus+ Exchange Program',
-        years: 'Autumn 2023 - Winter 2024'
+        years: '2025 - 2026'
     }
 ];
+
+const languages = [
+    { name: 'C / C++', icon: 'devicon-cplusplus-plain' },
+    { name: 'Rust', icon: 'devicon-rust-plain' },
+    { name: 'Python', icon: 'devicon-python-plain' },
+    { name: 'Java', icon: 'devicon-java-plain' },
+    { name: 'TypeScript', icon: 'devicon-typescript-plain' },
+    { name: 'JavaScript', icon: 'devicon-javascript-plain' },
+    { name: 'HTML5', icon: 'devicon-html5-plain' },
+    { name: 'CSS3', icon: 'devicon-css3-plain' },
+    { name: 'Bash', icon: 'devicon-bash-plain' },
+    { name: 'R', icon: 'devicon-r-plain' },
+    { name: 'MATLAB', icon: 'devicon-matlab-plain' }
+];
+
+const tools = [
+    { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-plain.svg' },
+    { name: 'Next.js', icon: 'devicon-nextjs-plain' },
+    { name: 'Tailwind', icon: 'devicon-tailwindcss-plain' },
+    { name: 'Linux', icon: 'devicon-linux-plain' },
+    { name: 'Docker', icon: 'devicon-docker-plain' },
+    { name: 'Nginx', icon: 'devicon-nginx-original' },
+    { name: 'Apache', icon: 'devicon-apache-plain' },
+    { name: 'PostgreSQL', icon: 'devicon-postgresql-plain' },
+    { name: 'MySQL', icon: 'devicon-mysql-plain' },
+    { name: 'Unity', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg' },
+    { name: 'Godot', icon: 'devicon-godot-plain' },
+    { name: 'Git', icon: 'devicon-git-plain' },
+    { name: 'GitHub', icon: 'devicon-github-original' },
+    { name: 'GitLab', icon: 'devicon-gitlab-plain' },
+    { name: 'Actions', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-plain.svg' },
+    { name: 'CMake', icon: 'devicon-cmake-plain' }
+];
+
+const duplicatedLanguages = [...languages, ...languages, ...languages, ...languages];
+const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
 ---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
 <section class="py-20 animate-fade-in-up">
     <h2 class="mb-12 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
@@ -20,18 +58,21 @@ const education = [
     
     <div class="grid gap-12 lg:grid-cols-3">
         <div class="space-y-6 text-base leading-relaxed text-gray-600 dark:text-zinc-400 lg:col-span-2 transition-colors duration-300">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">My Background</h3>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">Background & Evolution</h3>
             <p>
-                Hello! My name is Iago Fernández Perlo, and from a very young age, I have had a profound interest in computers, often dismantling and reassembling old PC hardware to understand how physical components interact. This early hands-on exploration sparked a passion that naturally led me toward the academic intersection of logic and systems engineering.
+                My trajectory in engineering began in childhood with a natural curiosity for logic, mathematics, and physical creation. I spent my early years tinkering with Arduino boards, building simple machines, and exploring block-based programming. This hands-on hardware experience quickly evolved into developing video game modifications, building early websites, and writing automated scripts for Linux environments.
             </p>
             <p>
-                During my secondary education, I developed a strict foundation in algorithmic logic by actively participating in regional mathematical competitions, including the national Mathematical Olympiad and LigaMat. As I delved deeper into computer science, I quickly realized that achieving maximum efficiency required a solid understanding of the underlying mathematics. My trajectory is defined by this continuous search for optimal computational models and their low-level implementation.
+                A rigorous foundation in analytical thinking was established through competitive problem solving. A broad passion for scientific inquiry led me to qualify for the national Mathematics, Physics, and Chemistry Olympiads, alongside <em>LigaMAT</em> (a competitive national mathematical league) and regional robotics competitions. This continuous search for optimal models culminated in graduating with the <em>Premio Extraordinario de Bachillerato</em> (Extraordinary High School Award) and achieving <em>Matrícula de Honor</em> (Highest Honors). Driven by these achievements, I enrolled in the Dual BSc in Mathematics and Computer Engineering.
             </p>
             <p>
-                To complement my focus on system architecture, I have proactively expanded my knowledge of network security. I completed specialized coursework through INCIBE and participate in university and regional Capture The Flag (CTF) events. While I treat these primarily as practical learning exercises, they provide invaluable hands-on experience in identifying vulnerabilities and understanding the critical importance of secure infrastructure design.
+                As my technical scope broadened during my university studies, I developed a strong focus on cybersecurity. Utilizing distributions like Kali Linux and Parrot OS, I gained practical experience by participating in Capture The Flag (CTF) events and developing custom cryptographic utilities and reverse shells. To solidify these operational skills, I completed specialized coursework accredited by INCIBE (Spanish National Cybersecurity Institute). Furthermore, my ongoing Erasmus+ exchange at the University of Łódź has proven my capacity for rapid adaptation and effective communication within novel, dynamic international environments.
             </p>
             <p>
-                Currently, I am heavily focused on concurrent architectures, high-performance computing, and the intricate infrastructure required for AI. I thrive on challenges that demand minimizing temporal and spatial complexity in low-latency environments.
+                Today, my core focus remains squarely on the intersection of low-level optimization and advanced mathematical algorithms. This is currently reflected in my work as a Software Engineering Intern at RAPOSa (CITMAGA). In this role, I leverage a strong mathematical background in optimization to integrate low-level solver APIs into the core software architecture. By engineering solutions in C++, I bridge the gap between theoretical mathematics and high-performance software execution, demanding strict minimization of temporal and spatial complexity.
+            </p>
+            <p>
+                Looking ahead, I am focused on completing my dual degree and transitioning into a professional role that leverages this unique intersection of disciplines. I am actively exploring opportunities in high-performance computing, AI infrastructure, and algorithmic trading, while also considering specialized Master's programs oriented towards HPC to further deepen my technical expertise.
             </p>
         </div>
 
@@ -48,4 +89,163 @@ const education = [
             </div>
         </div>
     </div>
+    
+    <h3 class="mt-16 mb-6 text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
+        Languages & Core Syntax
+    </h3>
+    
+    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
+        <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
+            
+            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/40 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-200/30 dark:hover:from-blue-900/30 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+                <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <div class="animate-carousel-left flex w-max items-center h-full">
+                {duplicatedLanguages.map(tech => (
+                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-4 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                        <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
+                            {tech.icon.startsWith('http') ? (
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                            ) : (
+                                <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
+                            )}
+                        </div>
+                        <span class="absolute bottom-5 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+                            {tech.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mt-12 mb-6 text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
+        Infrastructure & Frameworks
+    </h3>
+    
+    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
+        <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
+            
+            <button class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/40 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-200/30 dark:hover:from-blue-900/30 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+                <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                </svg>
+            </button>
+
+            <div class="animate-carousel-right flex w-max items-center h-full">
+                {duplicatedTools.map(tech => (
+                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-4 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                        <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
+                            {tech.icon.startsWith('http') ? (
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                            ) : (
+                                <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
+                            )}
+                        </div>
+                        <span class="absolute bottom-5 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+                            {tech.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
 </section>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        let mouseX = -1;
+        let mouseY = -1;
+        let isAccelerating = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        setInterval(() => {
+            const hoveredEl = document.elementFromPoint(mouseX, mouseY);
+            let anyHovered = false;
+
+            document.querySelectorAll('.icon-card').forEach(card => {
+                if (card.contains(hoveredEl)) {
+                    card.classList.add('is-hovered');
+                    anyHovered = true;
+                } else {
+                    card.classList.remove('is-hovered');
+                }
+            });
+
+            if (!isAccelerating) {
+                document.querySelectorAll('.animate-carousel-left, .animate-carousel-right').forEach(track => {
+                    const anims = track.getAnimations();
+                    anims.forEach(anim => {
+                        anim.playbackRate = anyHovered ? 0.5 : 1.0;
+                    });
+                });
+            }
+        }, 50);
+
+        const carousels = document.querySelectorAll('.carousel-container');
+
+        carousels.forEach(container => {
+            const track = container.querySelector('.animate-carousel-left, .animate-carousel-right');
+            const leftBtn = container.querySelector('.btn-left');
+            const rightBtn = container.querySelector('.btn-right');
+            
+            if(!track) return;
+
+            const accelerate = (e) => {
+                e.stopPropagation();
+                isAccelerating = true;
+                const anims = track.getAnimations();
+                anims.forEach(anim => { anim.playbackRate = 4.0; });
+            };
+
+            const resetSpeed = (e) => {
+                e.stopPropagation();
+                isAccelerating = false;
+            };
+
+            if(leftBtn) {
+                leftBtn.addEventListener('mousedown', accelerate);
+                leftBtn.addEventListener('mouseup', resetSpeed);
+                leftBtn.addEventListener('mouseleave', resetSpeed);
+                leftBtn.addEventListener('touchstart', accelerate, { passive: true });
+                leftBtn.addEventListener('touchend', resetSpeed);
+            }
+
+            if(rightBtn) {
+                rightBtn.addEventListener('mousedown', accelerate);
+                rightBtn.addEventListener('mouseup', resetSpeed);
+                rightBtn.addEventListener('mouseleave', resetSpeed);
+                rightBtn.addEventListener('touchstart', accelerate, { passive: true });
+                rightBtn.addEventListener('touchend', resetSpeed);
+            }
+        });
+    });
+</script>
+
+<style>
+    @keyframes carousel-left {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    @keyframes carousel-right {
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
+    }
+    .animate-carousel-left {
+        animation: carousel-left 44s linear infinite;
+    }
+    .animate-carousel-right {
+        animation: carousel-right 64s linear infinite;
+    }
+</style>
