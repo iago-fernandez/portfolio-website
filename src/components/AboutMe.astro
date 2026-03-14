@@ -94,12 +94,12 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         Languages & Core Syntax
     </h3>
     
-    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
+    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
         <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/40 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-200/30 dark:hover:from-blue-900/30 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
@@ -107,15 +107,15 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
 
             <div class="animate-carousel-left flex w-max items-center h-full">
                 {duplicatedLanguages.map(tech => (
-                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-4 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.startsWith('http') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400 group-hover/card:bg-blue-600 dark:group-hover/card:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
-                        <span class="absolute bottom-5 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <span class="absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
                             {tech.name}
                         </span>
                     </div>
@@ -128,12 +128,12 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         Infrastructure & Frameworks
     </h3>
     
-    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
+    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
         <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/40 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-200/30 dark:hover:from-blue-900/30 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                 </svg>
@@ -141,15 +141,15 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
 
             <div class="animate-carousel-right flex w-max items-center h-full">
                 {duplicatedTools.map(tech => (
-                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-4 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.startsWith('http') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400 group-hover/card:bg-blue-600 dark:group-hover/card:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
-                        <span class="absolute bottom-5 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <span class="absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
                             {tech.name}
                         </span>
                     </div>
@@ -164,6 +164,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         let mouseX = -1;
         let mouseY = -1;
         let isAccelerating = false;
+        let currentlyHovered = false;
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -171,11 +172,13 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         });
 
         setInterval(() => {
+            if (mouseX === -1 || mouseY === -1) return;
+
             const hoveredEl = document.elementFromPoint(mouseX, mouseY);
             let anyHovered = false;
 
             document.querySelectorAll('.icon-card').forEach(card => {
-                if (card.contains(hoveredEl)) {
+                if (hoveredEl && card.contains(hoveredEl)) {
                     card.classList.add('is-hovered');
                     anyHovered = true;
                 } else {
@@ -183,13 +186,15 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
                 }
             });
 
-            if (!isAccelerating) {
-                document.querySelectorAll('.animate-carousel-left, .animate-carousel-right').forEach(track => {
-                    const anims = track.getAnimations();
-                    anims.forEach(anim => {
-                        anim.playbackRate = anyHovered ? 0.5 : 1.0;
+            if (anyHovered !== currentlyHovered) {
+                currentlyHovered = anyHovered;
+                if (!isAccelerating) {
+                    document.querySelectorAll('.animate-carousel-left, .animate-carousel-right').forEach(track => {
+                        track.getAnimations().forEach(anim => {
+                            anim.playbackRate = currentlyHovered ? 0.5 : 1.0;
+                        });
                     });
-                });
+                }
             }
         }, 50);
 
@@ -212,6 +217,8 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             const resetSpeed = (e) => {
                 e.stopPropagation();
                 isAccelerating = false;
+                const anims = track.getAnimations();
+                anims.forEach(anim => { anim.playbackRate = currentlyHovered ? 0.5 : 1.0; });
             };
 
             if(leftBtn) {
