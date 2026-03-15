@@ -105,7 +105,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
@@ -113,15 +113,15 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
 
             <div class="animate-carousel-left flex w-max items-center h-full">
                 {duplicatedLanguages.map(tech => (
-                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
-                        <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
+                    <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                        <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.includes('http') || tech.icon.includes('data:') ? (
                                 <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
-                        <span class="absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <span class="pointer-events-none absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300">
                             {tech.name}
                         </span>
                     </div>
@@ -139,7 +139,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                 </svg>
@@ -147,15 +147,15 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
 
             <div class="animate-carousel-right flex w-max items-center h-full">
                 {duplicatedTools.map(tech => (
-                    <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
-                        <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
+                    <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                        <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.includes('http') || tech.icon.includes('data:') ? (
                                 <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
-                        <span class="absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300 pointer-events-none">
+                        <span class="pointer-events-none absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300">
                             {tech.name}
                         </span>
                     </div>
@@ -257,8 +257,15 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
     }
     .animate-carousel-left {
         animation: carousel-left 68s linear infinite;
+        will-change: transform;
     }
     .animate-carousel-right {
         animation: carousel-right 64s linear infinite;
+        will-change: transform;
+    }
+    .icon-card {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
     }
 </style>
