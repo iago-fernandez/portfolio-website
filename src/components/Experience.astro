@@ -2,6 +2,7 @@
 interface ExperienceData {
     title: string;
     company: string;
+    companyUrl?: string;
     period: string;
     description: string;
     details?: string;
@@ -12,10 +13,11 @@ const experiences: ExperienceData[] = [
     {
         title: 'Software Engineering Intern',
         company: 'RAPOSa',
-        period: 'Upcoming',
-        description: 'Research and development focused on algorithmic optimization and high-performance computing infrastructure.',
-        details: 'Implementing solutions to maximize temporal and spatial efficiency. Interfacing directly with low-level C++ APIs for advanced mathematical solvers including IPOPT, Knitro, Mosek, and Clarabel to optimize complex computational models.',
-        technologies: ['C++', 'IPOPT', 'Knitro', 'Mosek', 'Clarabel']
+        companyUrl: 'https://raposa.usc.es/',
+        period: 'October 2025 - Present',
+        description: 'Developing low-level C++ interfaces for global polynomial optimization solvers and designing a new Second-Order Cone Programming (SOCP) input system, focusing on strict memory management and algorithmic efficiency.',
+        details: 'RAPOSa is a state-of-the-art global polynomial optimization solver. My core responsibility involves engineering low-level C++ interfaces to seamlessly integrate powerful mathematical solvers, including IPOPT, Knitro, Mosek, and Clarabel. Additionally, I am contributing to the architecture by designing a new SOCP input system to tighten relaxations using advanced conic constraints. The C++ build system is orchestrated using CMake and Make, supported by Python scripting for workflow automation. Version control and continuous integration are managed through a self-hosted GitLab instance, allowing for unlimited, secure deployments and benchmarking directly on the CESGA (Galicia Supercomputing Center) infrastructure. The project is currently maintained in this private environment with a roadmap for a future open-source release. The ongoing advancements of this project will be presented by my tutors, Julio González Díaz and Brais González Rodríguez, at the 24th Conference of the International Federation of Operational Research Societies (IFORS 2026) in Vienna, Austria.',
+        technologies: ['C++', 'CMake', 'Python', 'GitLab', 'SOCP', 'IPOPT', 'Knitro', 'Mosek', 'Clarabel', 'CESGA']
     }
 ];
 ---
@@ -24,7 +26,7 @@ const experiences: ExperienceData[] = [
     <h2 class="mb-10 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
         Experience
     </h2>
-    <div class="ml-3 space-y-8 border-l border-gray-200 dark:border-zinc-700 transition-colors duration-300">
+    <div class="ml-3 space-y-8 border-l border-zinc-300 dark:border-zinc-700 transition-colors duration-300">
         {experiences.map((exp) => (
             <div class="relative pl-8">
                 <div class="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white dark:border-zinc-900 bg-blue-600 dark:bg-blue-500 shadow-sm transition-colors duration-300"></div>
@@ -32,7 +34,13 @@ const experiences: ExperienceData[] = [
                     <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-100 transition-colors duration-300">{exp.title}</h3>
                     <time class="text-sm font-semibold text-gray-500 dark:text-zinc-400 transition-colors duration-300">{exp.period}</time>
                 </div>
-                <p class="mb-3 text-sm font-bold text-blue-600 dark:text-blue-400 transition-colors duration-300">{exp.company}</p>
+                {exp.companyUrl ? (
+                    <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer" class="mb-3 inline-block text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline transition-colors duration-300">
+                        {exp.company}
+                    </a>
+                ) : (
+                    <p class="mb-3 text-sm font-bold text-blue-600 dark:text-blue-400 transition-colors duration-300">{exp.company}</p>
+                )}
                 <p class="text-base leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">{exp.description}</p>
                 
                 {exp.details && (
