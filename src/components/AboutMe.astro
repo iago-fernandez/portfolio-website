@@ -13,14 +13,20 @@ const education = [
 ];
 
 const languages = [
-    { name: 'C / C++', icon: 'devicon-cplusplus-plain' },
+    { name: 'C', icon: 'devicon-c-plain' },
+    { name: 'C++', icon: 'devicon-cplusplus-plain' },
     { name: 'Rust', icon: 'devicon-rust-plain' },
+    { name: 'Fortran', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg' },
+    { name: 'Assembly', icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIxIDExVjloLTJWN2MwLTEuMS0uOS0yLTItMmgtMlYzaC0ydjJoLTJWM0g5djJIN2MtMS4xIDAtMiAuOS0yIDJ2MkgzdjJoMnYySDN2MmgydjJjMCAxLjEuOSAyIDIgMmgydjJoMnYtMmgydjJoMnYtMmgydi0yaDJjMS4xIDAgMi0uOSAyLTJ2LTJoMnYtMmgtMnYtMmgyem0tNCA2SDdWN2gxMHYxMHoiLz48cGF0aCBkPSJNOSA5aDZ2Nkg5eiIvPjwvc3ZnPg==' },
     { name: 'Python', icon: 'devicon-python-plain' },
     { name: 'Java', icon: 'devicon-java-plain' },
+    { name: 'C#', icon: 'devicon-csharp-plain' },
+    { name: 'SQL', icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDNDNy41OCAzIDQgNC43OSA0IDdzMy41OCA0IDggNCA4LTEuNzkgOC00LTMuNTgtNC04LTR6TTQgOXYzYzAgMi4yMSAzLjU4IDQgOCA0czgtMS43OSA4LTRWOWMwIDIuMjEtMy41OCA0LTggNHMtOC0xLjc5LTgtNHptMCA1djNjMCAyLjIxIDMuNTggNCA4IDRzOC0xLjc5IDgtNHYtM2MwIDIuMjEtMy41OCA0LTggNHMtOC0xLjc5LTgtNHoiLz48L3N2Zz4=' },
     { name: 'TypeScript', icon: 'devicon-typescript-plain' },
     { name: 'JavaScript', icon: 'devicon-javascript-plain' },
     { name: 'HTML5', icon: 'devicon-html5-plain' },
     { name: 'CSS3', icon: 'devicon-css3-plain' },
+    { name: 'LaTeX', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg' },
     { name: 'Bash', icon: 'devicon-bash-plain' },
     { name: 'R', icon: 'devicon-r-plain' },
     { name: 'MATLAB', icon: 'devicon-matlab-plain' }
@@ -109,8 +115,8 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
                 {duplicatedLanguages.map(tech => (
                     <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
-                            {tech.icon.startsWith('http') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400 group-hover/card:bg-blue-600 dark:group-hover/card:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                            {tech.icon.includes('http') || tech.icon.includes('data:') ? (
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
@@ -143,8 +149,8 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
                 {duplicatedTools.map(tech => (
                     <div class="icon-card relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="flex h-full w-full items-center justify-center transition-transform duration-300">
-                            {tech.icon.startsWith('http') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400 group-hover/card:bg-blue-600 dark:group-hover/card:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                            {tech.icon.includes('http') || tech.icon.includes('data:') ? (
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
@@ -250,7 +256,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         100% { transform: translateX(0); }
     }
     .animate-carousel-left {
-        animation: carousel-left 44s linear infinite;
+        animation: carousel-left 68s linear infinite;
     }
     .animate-carousel-right {
         animation: carousel-right 64s linear infinite;

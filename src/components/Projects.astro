@@ -12,45 +12,56 @@ const projects: ProjectData[] = [
     {
         title: 'Async Network Engine',
         category: 'High-Performance Systems',
-        description: 'A custom, low-latency network stack engineered to bypass the overhead of standard abstractions.',
-        extendedDetails: 'This project demonstrates a deep understanding of kernel-level event notification. It utilizes epoll for maximizing I/O throughput and implements strict lock-free data structures to eliminate synchronization latency. The custom binary protocol parsing ensures highly efficient data transmission, a fundamental requirement for building ultra-low-latency financial systems.',
-        technologies: ['C', 'epoll', 'Concurrency', 'Network Architecture'],
+        description: 'A custom network stack engineered in C to bypass standard abstractions and maximize asynchronous I/O throughput.',
+        extendedDetails: 'This project demonstrates a deep understanding of kernel-level event notification. It utilizes epoll for maximizing I/O capacity and implements strict lock-free data structures to eliminate synchronization latency. The custom binary protocol parsing ensures highly efficient data transmission, serving as a foundational architecture for fast and reliable networked systems.',
+        technologies: ['C', 'Linux Kernel', 'epoll', 'Network Protocols'],
         githubUrl: 'https://github.com/iago-fernandez/async-network-engine'
     },
     {
         title: 'Bare-Metal Homelab & Internal Cloud',
         category: 'Infrastructure as Code',
-        description: 'Infrastructure deployment designed to simulate enterprise-grade environments and secure networking.',
-        extendedDetails: 'Provides a sandboxed environment for testing security architectures. Orchestrates a containerized ecosystem using Docker, focusing strictly on network isolation. A reverse proxy manages internal routing, while remote access is exclusively established via a customized Wireguard tunnel, ensuring practical experience with the exact zero-trust deployment models used in production AI infrastructure.',
-        technologies: ['Shell', 'Docker', 'Networking', 'Wireguard'],
+        description: 'An active infrastructure deployment currently in production on a Raspberry Pi 4, operating as a secure home server to host a custom application and its underlying database.',
+        extendedDetails: 'This bare-metal environment is actively utilized to serve internal services. The ecosystem is orchestrated via Docker with strict network isolation and reverse proxy routing. Remote access is exclusively managed through a customized Wireguard zero-trust tunnel. While currently running on a Raspberry Pi 4, the containerized architecture is explicitly designed for a seamless migration to a high-performance mini PC to scale with future computational demands.',
+        technologies: ['Raspberry Pi', 'Docker', 'Wireguard', 'Nginx', 'PostgreSQL'],
         githubUrl: 'https://github.com/iago-fernandez/homelab'
     },
     {
         title: '3D Game of Life on Toroidal Board',
         category: 'Concurrent Computing',
-        description: 'A highly optimized simulation developed to push the limits of matrix calculation and memory contiguity.',
-        extendedDetails: 'Focused strictly on computational efficiency. It serves as a benchmark for parallelized code execution, maximizing temporal and spatial performance by optimizing the underlying matrix algorithms for a pixel-perfect 2D grid and the topological complexity of a 3D torus. These optimization principles are directly applicable to the spatial efficiency requirements of algorithmic trading.',
-        technologies: ['C++', 'Algorithms', 'Optimization', 'Rendering'],
+        description: 'A highly optimized simulation developed to push the limits of matrix calculation, memory contiguity, and parallelized execution.',
+        extendedDetails: 'Focused strictly on computational efficiency, this project serves as a benchmark for parallelized code execution. It maximizes temporal and spatial performance by optimizing the underlying matrix algorithms for a pixel-perfect 2D grid and the topological complexity of a 3D torus. These optimization principles are directly applicable to the memory management requirements of complex mathematical models.',
+        technologies: ['C++', 'Parallelization', 'Memory Management', 'Algorithms'],
         githubUrl: 'https://github.com/iago-fernandez/3d-game-of-life'
+    },
+    {
+        title: 'High-Performance Portfolio',
+        category: 'Frontend Engineering',
+        description: 'A statically generated website engineered for maximum speed and efficiency, deployed directly on Cloudflare.',
+        extendedDetails: 'Built using Astro and Tailwind CSS to guarantee a minimal footprint and optimal Core Web Vitals. It leverages static site generation to eliminate heavy client-side rendering overhead. The architecture implements native view transitions and dynamic theming, serving as a practical demonstration of strict adherence to clean code principles, semantic HTML, and modern CSS rendering engines.',
+        technologies: ['Astro', 'Tailwind CSS', 'TypeScript', 'Cloudflare'],
+        githubUrl: 'https://github.com/iago-fernandez/portfolio-website'
     },
     {
         title: 'DFA Visualizer',
         category: 'Algorithmic Theory',
         description: 'A mathematical tool created to bridge the gap between abstract automata theory and practical software execution.',
-        extendedDetails: 'Renders both the static Deterministic Finite Automata (DFA) definition and dynamic execution paths using Graphviz. It validates structural logic and provides a clear visual proof of algorithmic correctness against strict theoretical computation models.',
-        technologies: ['Python', 'Automata Theory', 'Graphviz'],
+        extendedDetails: 'Renders both the static Deterministic Finite Automata (DFA) definition and dynamic execution paths using Graphviz. It validates structural logic and provides a clear visual proof of algorithmic correctness against strict theoretical computation models, demonstrating a strong foundation in theoretical computer science.',
+        technologies: ['Python', 'Graphviz', 'Automata Theory', 'Data Structures'],
         githubUrl: 'https://github.com/iago-fernandez/dfa-visualizer'
     }
 ];
 ---
 
 <section id="projects" class="py-20 animate-fade-in-up">
-    <h2 class="mb-10 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
+    <h2 class="mb-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
         Technical Projects
     </h2>
+    <p class="mb-12 text-base leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+        I am actively developing several technical projects focused on low-level system architecture and computational efficiency. I strictly adhere to professional version control standards across all repositories, maintaining feature branches, conventional commits, and stable releases. Below is a comprehensive overview of my core architectural deployments, including direct links to each GitHub repository for full source code access and technical review.
+    </p>
     <div class="grid gap-8 sm:grid-cols-2 items-start">
         {projects.map((project) => (
-            <div class="flex flex-col rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-blue-900/10">
+            <div class="flex flex-col h-full rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-blue-900/10">
                 <div class="mb-4">
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 transition-colors duration-300">
                         {project.category}
@@ -59,7 +70,7 @@ const projects: ProjectData[] = [
                         {project.title}
                     </h3>
                 </div>
-                <p class="mb-4 flex-1 text-sm leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+                <p class="mb-4 text-sm leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
                     {project.description}
                 </p>
                 
@@ -76,25 +87,27 @@ const projects: ProjectData[] = [
                     </div>
                 </details>
 
-                <div class="mb-6 flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                        <span class="rounded-md bg-blue-50 dark:bg-zinc-700/50 px-2.5 py-1 text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900/30 transition-colors duration-300">
-                            {tech}
-                        </span>
-                    ))}
-                </div>
-                <div class="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-700 transition-colors duration-300">
-                    <a 
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer" 
-                        class="inline-flex items-center text-sm font-bold text-gray-900 dark:text-zinc-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-                    >
-                        <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                        </svg>
-                        View Repository
-                    </a>
+                <div class="mt-auto pt-2">
+                    <div class="mb-6 flex flex-wrap gap-2">
+                        {project.technologies.map((tech) => (
+                            <span class="rounded-md bg-blue-50 dark:bg-zinc-700/50 px-2.5 py-1 text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900/30 transition-colors duration-300">
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                    <div class="pt-4 border-t border-gray-100 dark:border-zinc-700 transition-colors duration-300">
+                        <a 
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer" 
+                            class="inline-flex items-center text-sm font-bold text-gray-900 dark:text-zinc-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                        >
+                            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                            </svg>
+                            View Repository
+                        </a>
+                    </div>
                 </div>
             </div>
         ))}
