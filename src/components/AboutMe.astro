@@ -12,47 +12,59 @@ const education = [
     }
 ];
 
-const languages = [
-    { name: 'C', icon: 'devicon-c-plain' },
+const coreLanguages = [
+    { name: 'C', icon: '/icons/c.svg' },
     { name: 'C++', icon: 'devicon-cplusplus-plain' },
     { name: 'Rust', icon: 'devicon-rust-plain' },
-    { name: 'Fortran', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg' },
     { name: 'Assembly', icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIxIDExVjloLTJWN2MwLTEuMS0uOS0yLTItMmgtMlYzaC0ydjJoLTJWM0g5djJIN2MtMS4xIDAtMiAuOS0yIDJ2MkgzdjJoMnYySDN2MmgydjJjMCAxLjEuOSAyIDIgMmgydjJoMnYtMmgydjJoMnYtMmgydi0yaDJjMS4xIDAgMi0uOSAyLTJ2LTJoMnYtMmgtMnYtMmgyem0tNCA2SDdWN2gxMHYxMHoiLz48cGF0aCBkPSJNOSA5aDZ2Nkg5eiIvPjwvc3ZnPg==' },
+    { name: 'Fortran', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg' },
     { name: 'Python', icon: 'devicon-python-plain' },
-    { name: 'Java', icon: 'devicon-java-plain' },
-    { name: 'C#', icon: 'devicon-csharp-plain' },
-    { name: 'SQL', icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDNDNy41OCAzIDQgNC43OSA0IDdzMy41OCA0IDggNCA4LTEuNzkgOC00LTMuNTgtNC04LTR6TTQgOXYzYzAgMi4yMSAzLjU4IDQgOCA0czgtMS43OSA4LTRWOWMwIDIuMjEtMy41OCA0LTggNHMtOC0xLjc5LTgtNHptMCA1djNjMCAyLjIxIDMuNTggNCA4IDRzOC0xLjc5IDgtNHYtM2MwIDIuMjEtMy41OCA0LTggNHMtOC0xLjc5LTgtNHoiLz48L3N2Zz4=' },
-    { name: 'TypeScript', icon: 'devicon-typescript-plain' },
-    { name: 'JavaScript', icon: 'devicon-javascript-plain' },
-    { name: 'HTML5', icon: 'devicon-html5-plain' },
-    { name: 'CSS3', icon: 'devicon-css3-plain' },
-    { name: 'LaTeX', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg' },
-    { name: 'Bash', icon: 'devicon-bash-plain' },
+    { name: 'MATLAB', icon: 'devicon-matlab-plain' },
     { name: 'R', icon: 'devicon-r-plain' },
-    { name: 'MATLAB', icon: 'devicon-matlab-plain' }
+    { name: 'Maple', icon: '/icons/maple.svg' },
+    { name: 'AMPL', icon: '/icons/ampl.svg' },
+    { name: 'SQL', icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDNDNy41OCAzIDQgNC43OSA0IDdzMy41OCA0IDggNCA4LTEuNzkgOC00LTMuNTgtNC04LTR6TTQgOXYzYzAgMi4yMSAzLjU4IDQgOCA0czgtMS43OSA4LTRWOWMwIDIuMjEtMy41OCA0LTggNHMtOC0xLjc5LTgtNHptMCA1djNjMCAyLjIxIDMuNTggNCA4IDRzOC0xLjc5IDgtNHYtM2MwIDIuMjEtMy41OCA0LTggNHMtOC0xLjc5LTgtNHoiLz48L3N2Zz4=' },
+    { name: 'Java', icon: 'devicon-java-plain' },
+    { name: 'C#', icon: 'devicon-csharp-plain' }
 ];
 
-const tools = [
-    { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-plain.svg' },
-    { name: 'Next.js', icon: 'devicon-nextjs-plain' },
-    { name: 'Tailwind', icon: 'devicon-tailwindcss-plain' },
+const infrastructure = [
     { name: 'Linux', icon: 'devicon-linux-plain' },
+    { name: 'Bash', icon: 'devicon-bash-plain' },
     { name: 'Docker', icon: 'devicon-docker-plain' },
-    { name: 'Nginx', icon: 'devicon-nginx-original' },
-    { name: 'Apache', icon: 'devicon-apache-plain' },
-    { name: 'PostgreSQL', icon: 'devicon-postgresql-plain' },
-    { name: 'MySQL', icon: 'devicon-mysql-plain' },
-    { name: 'Unity', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg' },
-    { name: 'Godot', icon: 'devicon-godot-plain' },
+    { name: 'CMake', icon: 'devicon-cmake-plain' },
+    { name: 'Make', icon: '/icons/make.svg' },
+    { name: 'Ninja', icon: '/icons/ninja.svg' },
     { name: 'Git', icon: 'devicon-git-plain' },
     { name: 'GitHub', icon: 'devicon-github-original' },
     { name: 'GitLab', icon: 'devicon-gitlab-plain' },
     { name: 'Actions', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-plain.svg' },
-    { name: 'CMake', icon: 'devicon-cmake-plain' }
+    { name: 'PostgreSQL', icon: 'devicon-postgresql-plain' },
+    { name: 'MySQL', icon: 'devicon-mysql-plain' },
+    { name: 'Nginx', icon: 'devicon-nginx-original' },
+    { name: 'Apache', icon: 'devicon-apache-plain' }
 ];
 
-const duplicatedLanguages = [...languages, ...languages, ...languages, ...languages];
-const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
+const additionalTech = [
+    { name: 'NumPy', icon: 'devicon-numpy-plain' },
+    { name: 'Pandas', icon: 'devicon-pandas-plain' },
+    { name: 'OpenGL', icon: 'devicon-opengl-plain' },
+    { name: 'Unity', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg' },
+    { name: 'Godot', icon: 'devicon-godot-plain' },
+    { name: 'LaTeX', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg' },
+    { name: 'Figma', icon: 'devicon-figma-plain' },
+    { name: 'TypeScript', icon: 'devicon-typescript-plain' },
+    { name: 'JavaScript', icon: 'devicon-javascript-plain' },
+    { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-plain.svg' },
+    { name: 'Next.js', icon: 'devicon-nextjs-plain' },
+    { name: 'Tailwind', icon: 'devicon-tailwindcss-plain' },
+    { name: 'HTML5', icon: 'devicon-html5-plain' },
+    { name: 'CSS3', icon: 'devicon-css3-plain' }
+];
+
+const duplicatedCore = [...coreLanguages, ...coreLanguages, ...coreLanguages, ...coreLanguages];
+const duplicatedInfra = [...infrastructure, ...infrastructure, ...infrastructure, ...infrastructure];
+const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech, ...additionalTech];
 ---
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -78,7 +90,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
                 Today, my core focus remains squarely on the intersection of low-level optimization and advanced mathematical algorithms. This is currently reflected in my work as a Software Engineering Intern at RAPOSa (CITMAGA). In this role, I leverage a strong mathematical background in optimization to integrate low-level solver APIs into the core software architecture. By engineering solutions in C++, I bridge the gap between theoretical mathematics and high-performance software execution, demanding strict minimization of temporal and spatial complexity.
             </p>
             <p>
-                Looking ahead, I am focused on completing my dual degree and transitioning into a professional role that leverages this unique intersection of disciplines. I am actively exploring opportunities in high-performance computing, AI infrastructure, and algorithmic trading, while also considering specialized Master's programs oriented towards HPC to further deepen my technical expertise.
+                Looking ahead, I am focused on completing my dual degree and transitioning into a professional role that leverages this unique intersection of disciplines. I am actively exploring opportunities in high-performance computing, low-level systems engineering, and the development of mission-critical software. I am also considering specialized Master's programs to further deepen my technical expertise in advanced computational models and algorithmic optimization.
             </p>
         </div>
 
@@ -96,9 +108,14 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         </div>
     </div>
     
-    <h3 class="mt-16 mb-6 text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
-        Languages & Core Syntax
-    </h3>
+    <div class="mt-16 mb-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
+            Core Languages & Mathematical Tools
+        </h3>
+        <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+            The foundational syntax utilized for high-performance execution, memory management, and rigorous mathematical modeling.
+        </p>
+    </div>
     
     <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
         <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
@@ -112,10 +129,10 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             </button>
 
             <div class="animate-carousel-left flex w-max items-center h-full">
-                {duplicatedLanguages.map(tech => (
+                {duplicatedCore.map(tech => (
                     <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
-                            {tech.icon.includes('http') || tech.icon.includes('data:') ? (
+                            {tech.icon.includes('http') || tech.icon.includes('data:') || tech.icon.startsWith('/') ? (
                                 <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
@@ -130,9 +147,14 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         </div>
     </div>
 
-    <h3 class="mt-12 mb-6 text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
-        Infrastructure & Frameworks
-    </h3>
+    <div class="mt-12 mb-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
+            Systems, Infrastructure & Compilation
+        </h3>
+        <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+            The architectural environments, build systems, and orchestration tools utilized to deploy and maintain robust engineering solutions.
+        </p>
+    </div>
     
     <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
         <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
@@ -146,10 +168,10 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             </button>
 
             <div class="animate-carousel-right flex w-max items-center h-full">
-                {duplicatedTools.map(tech => (
+                {duplicatedInfra.map(tech => (
                     <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
-                            {tech.icon.includes('http') || tech.icon.includes('data:') ? (
+                            {tech.icon.includes('http') || tech.icon.includes('data:') || tech.icon.startsWith('/') ? (
                                 <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
                                 <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
@@ -163,6 +185,46 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             </div>
         </div>
     </div>
+
+    <div class="mt-12 mb-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
+            Versatility & Additional Ecosystems
+        </h3>
+        <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+            Complementary libraries and frameworks managed for data analysis, graphical rendering, and comprehensive full-stack development.
+        </p>
+    </div>
+    
+    <div class="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300">
+        <div class="carousel-container relative w-full overflow-hidden flex h-28 group/slider">
+            <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
+            
+            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+                <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <div class="animate-carousel-extra flex w-max items-center h-full">
+                {duplicatedExtra.map(tech => (
+                    <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                        <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
+                            {tech.icon.includes('http') || tech.icon.includes('data:') || tech.icon.startsWith('/') ? (
+                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                            ) : (
+                                <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
+                            )}
+                        </div>
+                        <span class="pointer-events-none absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300">
+                            {tech.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <script>
@@ -195,7 +257,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
             if (anyHovered !== currentlyHovered) {
                 currentlyHovered = anyHovered;
                 if (!isAccelerating) {
-                    document.querySelectorAll('.animate-carousel-left, .animate-carousel-right').forEach(track => {
+                    document.querySelectorAll('.animate-carousel-left, .animate-carousel-right, .animate-carousel-extra').forEach(track => {
                         track.getAnimations().forEach(anim => {
                             anim.playbackRate = currentlyHovered ? 0.5 : 1.0;
                         });
@@ -207,7 +269,7 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
         const carousels = document.querySelectorAll('.carousel-container');
 
         carousels.forEach(container => {
-            const track = container.querySelector('.animate-carousel-left, .animate-carousel-right');
+            const track = container.querySelector('.animate-carousel-left, .animate-carousel-right, .animate-carousel-extra');
             const leftBtn = container.querySelector('.btn-left');
             const rightBtn = container.querySelector('.btn-right');
             
@@ -261,6 +323,10 @@ const duplicatedTools = [...tools, ...tools, ...tools, ...tools];
     }
     .animate-carousel-right {
         animation: carousel-right 64s linear infinite;
+        will-change: transform;
+    }
+    .animate-carousel-extra {
+        animation: carousel-left 72s linear infinite;
         will-change: transform;
     }
     .icon-card {
