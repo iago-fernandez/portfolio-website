@@ -128,14 +128,14 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 </svg>
             </button>
 
-            <div class="animate-carousel-left flex w-max items-center h-full">
+            <div class="animate-carousel-core flex w-max items-center h-full">
                 {duplicatedCore.map(tech => (
                     <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.includes('http') || tech.icon.includes('data:') || tech.icon.startsWith('/') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                                <div class="h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
-                                <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
+                                <i class={`${tech.icon} text-[48px] leading-none text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
                         <span class="pointer-events-none absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300">
@@ -167,14 +167,14 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 </svg>
             </button>
 
-            <div class="animate-carousel-right flex w-max items-center h-full">
+            <div class="animate-carousel-infra flex w-max items-center h-full">
                 {duplicatedInfra.map(tech => (
                     <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.includes('http') || tech.icon.includes('data:') || tech.icon.startsWith('/') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                                <div class="h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
-                                <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
+                                <i class={`${tech.icon} text-[48px] leading-none text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
                         <span class="pointer-events-none absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300">
@@ -211,9 +211,9 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                     <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             {tech.icon.includes('http') || tech.icon.includes('data:') || tech.icon.startsWith('/') ? (
-                                <div class="h-[46px] w-[46px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
+                                <div class="h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                             ) : (
-                                <i class={`${tech.icon} text-5xl text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
+                                <i class={`${tech.icon} text-[48px] leading-none text-gray-400 dark:text-zinc-600 transition-colors duration-300`}></i>
                             )}
                         </div>
                         <span class="pointer-events-none absolute bottom-4 text-xs font-bold text-gray-500 dark:text-zinc-400 opacity-0 transition-opacity duration-300">
@@ -257,7 +257,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             if (anyHovered !== currentlyHovered) {
                 currentlyHovered = anyHovered;
                 if (!isAccelerating) {
-                    document.querySelectorAll('.animate-carousel-left, .animate-carousel-right, .animate-carousel-extra').forEach(track => {
+                    document.querySelectorAll('.animate-carousel-core, .animate-carousel-infra, .animate-carousel-extra').forEach(track => {
                         track.getAnimations().forEach(anim => {
                             anim.playbackRate = currentlyHovered ? 0.5 : 1.0;
                         });
@@ -269,7 +269,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         const carousels = document.querySelectorAll('.carousel-container');
 
         carousels.forEach(container => {
-            const track = container.querySelector('.animate-carousel-left, .animate-carousel-right, .animate-carousel-extra');
+            const track = container.querySelector('.animate-carousel-core, .animate-carousel-infra, .animate-carousel-extra');
             const leftBtn = container.querySelector('.btn-left');
             const rightBtn = container.querySelector('.btn-right');
             
@@ -317,16 +317,16 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         0% { transform: translateX(-50%); }
         100% { transform: translateX(0); }
     }
-    .animate-carousel-left {
-        animation: carousel-left 68s linear infinite;
+    .animate-carousel-core {
+        animation: carousel-left 65s linear infinite;
         will-change: transform;
     }
-    .animate-carousel-right {
-        animation: carousel-right 64s linear infinite;
+    .animate-carousel-infra {
+        animation: carousel-right 70s linear infinite;
         will-change: transform;
     }
     .animate-carousel-extra {
-        animation: carousel-left 72s linear infinite;
+        animation: carousel-left 70s linear infinite;
         will-change: transform;
     }
     .icon-card {
