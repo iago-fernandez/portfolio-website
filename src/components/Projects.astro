@@ -52,64 +52,70 @@ const projects: ProjectData[] = [
 ];
 ---
 
-<section id="projects" class="py-20 animate-fade-in-up">
-    <h2 class="mb-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
-        Technical Projects
-    </h2>
-    <p class="mb-12 text-base leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
-        I am actively developing several technical projects focused on low-level system architecture and computational efficiency. I strictly adhere to professional version control standards across all repositories, maintaining feature branches, conventional commits, and stable releases. Below is a comprehensive overview of my core architectural deployments, including direct links to each GitHub repository for full source code access and technical review.
-    </p>
-    <div class="grid gap-8 sm:grid-cols-2 items-start">
-        {projects.map((project) => (
-            <div class="flex flex-col h-full rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-blue-900/10">
-                <div class="mb-4">
-                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 transition-colors duration-300">
-                        {project.category}
-                    </span>
-                    <h3 class="mt-2 text-xl font-bold text-gray-900 dark:text-zinc-100 transition-colors duration-300">
-                        {project.title}
-                    </h3>
-                </div>
-                <p class="mb-4 text-sm leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
-                    {project.description}
-                </p>
-                
-                <details class="group mb-6">
-                    <summary class="flex cursor-pointer items-center text-sm font-semibold text-gray-900 dark:text-zinc-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
-                        <span class="group-open:hidden">View architecture details</span>
-                        <span class="hidden group-open:inline">Hide architecture details</span>
-                        <svg class="ml-1 h-4 w-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </summary>
-                    <div class="mt-3 rounded-md bg-gray-50 dark:bg-zinc-900/50 p-4 text-sm text-gray-600 dark:text-zinc-400 border border-gray-100 dark:border-zinc-700 transition-colors duration-300">
-                        <p class="leading-relaxed">{project.extendedDetails}</p>
-                    </div>
-                </details>
-
-                <div class="mt-auto pt-2">
-                    <div class="mb-6 flex flex-wrap gap-2">
-                        {project.technologies.map((tech) => (
-                            <span class="rounded-md bg-blue-50 dark:bg-zinc-700/50 px-2.5 py-1 text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900/30 transition-colors duration-300">
-                                {tech}
+<section id="projects" class="py-20 animate-fade-in-up flex flex-col items-center">
+    <div class="w-full max-w-5xl">
+        <h2 class="mb-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
+            Technical Projects
+        </h2>
+        <p class="mb-12 text-base leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+            I am actively developing several technical projects focused on low-level system architecture and computational efficiency. I strictly adhere to professional version control standards across all repositories, maintaining feature branches, conventional commits, and stable releases. Below is a comprehensive overview of my core architectural deployments, including direct links to each GitHub repository for full source code access and technical review.
+        </p>
+        
+        <div class="flex flex-col gap-8 w-full">
+            {projects.map((project) => (
+                <div class="flex flex-col sm:flex-row rounded-2xl border border-zinc-200 dark:border-zinc-700/60 bg-white dark:bg-zinc-800 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md dark:hover:shadow-blue-900/10 overflow-hidden">
+                    
+                    <div class="flex flex-col flex-grow p-6 sm:p-8">
+                        <div class="mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 transition-colors duration-300">
+                                {project.category}
                             </span>
-                        ))}
+                            <h3 class="mt-1 text-2xl font-bold text-gray-900 dark:text-zinc-100 transition-colors duration-300">
+                                {project.title}
+                            </h3>
+                        </div>
+                        <p class="mb-5 text-base leading-relaxed text-gray-600 dark:text-zinc-400 transition-colors duration-300">
+                            {project.description}
+                        </p>
+                        
+                        <details class="group mt-auto">
+                            <summary class="flex cursor-pointer items-center text-sm font-semibold text-gray-900 dark:text-zinc-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none select-none">
+                                <span class="group-open:hidden">View architecture details</span>
+                                <span class="hidden group-open:inline">Hide architecture details</span>
+                                <svg class="ml-1.5 h-4 w-4 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </summary>
+                            <div class="mt-4 rounded-lg bg-zinc-50 dark:bg-zinc-900/40 p-5 text-sm text-gray-600 dark:text-zinc-400 border border-zinc-100 dark:border-zinc-700/50 transition-colors duration-300">
+                                <p class="leading-relaxed">{project.extendedDetails}</p>
+                            </div>
+                        </details>
                     </div>
-                    <div class="pt-4 border-t border-gray-100 dark:border-zinc-700 transition-colors duration-300">
-                        <a 
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer" 
-                            class="inline-flex items-center text-sm font-bold text-gray-900 dark:text-zinc-300 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-                        >
-                            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                            </svg>
-                            View Repository
-                        </a>
+
+                    <div class="flex flex-col sm:w-[300px] flex-shrink-0 border-t sm:border-t-0 sm:border-l border-zinc-200 dark:border-zinc-700/60 p-6 sm:p-8 bg-zinc-50/50 dark:bg-zinc-800/30 transition-colors duration-300">
+                        <div class="flex flex-wrap gap-2.5 mb-8">
+                            {project.technologies.map((tech) => (
+                                <span class="rounded-md bg-blue-50/80 dark:bg-blue-900/20 px-3 py-1.5 text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/30 transition-colors duration-300">
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                        <div class="mt-auto">
+                            <a 
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer" 
+                                class="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-zinc-900 px-4 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white hover:shadow-md active:scale-100"
+                            >
+                                <svg class="h-5 w-5 -ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                                </svg>
+                                View Repository
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        ))}
+            ))}
+        </div>
     </div>
 </section>
