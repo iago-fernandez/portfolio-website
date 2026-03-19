@@ -45,7 +45,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iagofern
             document.addEventListener('astro:after-swap', setTheme);
         </script>
     </head>
-    <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-blue-600 selection:text-white dark:bg-zinc-900 dark:text-zinc-300 transition-colors duration-300 pt-16 flex flex-col min-h-screen relative overflow-y-scroll">
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-blue-600 selection:text-white dark:bg-zinc-900 dark:text-zinc-300 transition-colors duration-300 pt-16 flex flex-col min-h-screen relative overflow-y-scroll overflow-x-hidden">
         <div class="pointer-events-none fixed inset-0 z-[-1] bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)] -webkit-[mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]"></div>        
         <Header />
         <div class="flex-grow flex flex-col">
