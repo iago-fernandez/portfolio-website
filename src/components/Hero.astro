@@ -8,7 +8,7 @@ const cvUrl = "/resume.pdf";
 ---
 
 <section id="hero-container" class="relative w-full overflow-hidden pt-8 pb-20 bg-zinc-50 dark:bg-zinc-900 transition-colors duration-300">
-    <canvas id="network-canvas" class="absolute inset-0 z-0 h-full w-full opacity-80 pointer-events-none dark:opacity-70 transition-opacity duration-300"></canvas>
+<canvas id="network-canvas" aria-hidden="true" class="absolute inset-0 z-0 h-full w-full opacity-80 pointer-events-none dark:opacity-70 transition-opacity duration-300"></canvas>
     <div class="mx-auto max-w-7xl px-6 sm:px-12 relative z-10">
         <div class="grid min-h-[85vh] grid-cols-1 items-center gap-y-12 gap-x-8 lg:grid-cols-12">
             <div class="order-2 min-w-0 animate-fade-in-up lg:order-1 lg:col-span-7 xl:col-span-8 lg:pr-8">
@@ -64,6 +64,7 @@ const cvUrl = "/resume.pdf";
         let particles: Particle[] = [];
         const mouse = { x: -9999, y: -9999 };
         let needsResize = false;
+        let animationId: number;
 
         const resizeObserver = new ResizeObserver(() => {
             needsResize = true;
@@ -236,5 +237,18 @@ const cvUrl = "/resume.pdf";
             requestAnimationFrame(animate);
         }
         animate();
+        
+        document.addEventListener('astro:before-swap', () => {
+            cancelAnimationFrame(animationId);
+            resizeObserver.disconnect();
+            
+            if (container) {
+                container.removeEventListener('mousemove', updateMousePosition as EventListener);
+                container.removeEventListener('mouseleave', resetMousePosition);
+                container.removeEventListener('touchstart', updateMousePosition as EventListener);
+                container.removeEventListener('touchmove', updateMousePosition as EventListener);
+                container.removeEventListener('touchend', resetMousePosition);
+            }
+        }, { once: true });
     });
 </script>

@@ -120,7 +120,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+<button aria-label="Scroll left" class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
@@ -155,7 +155,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button aria-label="Scroll right" class="btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                 </svg>
@@ -190,7 +190,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-            <button class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+<button aria-label="Scroll left" class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
@@ -219,13 +219,14 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         let mouseY = -1;
         let isAccelerating = false;
         let currentlyHovered = false;
-
-        document.addEventListener('mousemove', (e) => {
+        
+        const mouseMoveHandler = (e: MouseEvent) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-        });
-
-        setInterval(() => {
+        };
+        document.addEventListener('mousemove', mouseMoveHandler);
+        
+        const intervalId = setInterval(() => {
             if (mouseX === -1 || mouseY === -1) return;
 
             const hoveredEl = document.elementFromPoint(mouseX, mouseY);
@@ -291,6 +292,11 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 rightBtn.addEventListener('touchend', resetSpeed);
             }
         });
+
+        document.addEventListener('astro:before-swap', () => {
+            clearInterval(intervalId);
+            document.removeEventListener('mousemove', mouseMoveHandler);
+        }, { once: true });
     });
 </script>
 
