@@ -153,6 +153,12 @@
             (window as any).onloadTurnstileCallback = renderTurnstile;
         }
 
+        document.addEventListener('astro:before-swap', () => {
+            if ((window as any).turnstile && turnstileId !== undefined) {
+                (window as any).turnstile.remove(turnstileId);
+            }
+        }, { once: true });
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
