@@ -13,7 +13,7 @@ const isActive = (url: string) => {
 };
 ---
 
-<header class="fixed top-0 z-50 w-full border-b border-zinc-200 bg-white/90 dark:border-zinc-700 dark:bg-zinc-800/90 backdrop-blur-lg shadow-sm dark:shadow-black/20 transition-colors duration-300">
+<header class="fixed top-0 inset-x-0 z-50 border-b border-zinc-200 bg-white/90 dark:border-zinc-700 dark:bg-zinc-800/90 backdrop-blur-lg shadow-sm dark:shadow-black/20 transition-colors duration-300">
     <nav class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-12" aria-label="Global">
         <a href="/" class="text-xl font-extrabold tracking-tighter text-zinc-900 dark:text-zinc-100 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             iago<span class="font-medium text-blue-600 dark:text-blue-400">fernandez</span>
@@ -23,6 +23,7 @@ const isActive = (url: string) => {
                 {navLinks.map((link) => (
                     <a 
                         href={link.url} 
+                        data-astro-prefetch="hover"
                         class={`text-sm font-semibold transition-all hover:text-zinc-900 dark:hover:text-zinc-100 ${isActive(link.url) ? 'text-zinc-900 dark:text-zinc-100 border-b-2 border-zinc-900 dark:border-zinc-100 pb-0.5' : 'text-zinc-500 dark:text-zinc-400'}`}
                     >
                         {link.name}
@@ -55,6 +56,7 @@ const isActive = (url: string) => {
             {navLinks.map((link) => (
                 <a 
                     href={link.url} 
+                    data-astro-prefetch="hover"
                     class={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive(link.url) ? 'bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100' : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-700/50 dark:hover:text-zinc-100'}`}
                 >
                     {link.name}

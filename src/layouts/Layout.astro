@@ -34,6 +34,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iagofern
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
         <ViewTransitions />
+
+        <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+
         <script is:inline>
             const setTheme = () => {
                 const preference = typeof localStorage !== 'undefined' && localStorage.getItem('theme') 
