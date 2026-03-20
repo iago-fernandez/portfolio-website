@@ -267,6 +267,8 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 isAccelerating = true;
                 const anims = track.getAnimations();
                 anims.forEach(anim => { anim.playbackRate = 4.0; });
+
+                void track.offsetWidth;
             };
 
             const resetSpeed = (e) => {
@@ -274,6 +276,8 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 isAccelerating = false;
                 const anims = track.getAnimations();
                 anims.forEach(anim => { anim.playbackRate = currentlyHovered ? 0.5 : 1.0; });
+                
+                void track.offsetWidth;
             };
 
             if(leftBtn) {
