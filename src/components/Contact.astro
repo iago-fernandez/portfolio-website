@@ -83,8 +83,6 @@
     </div>
 </section>
 
-<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
-
 <script>
     document.addEventListener('astro:page-load', () => {
         const form = document.getElementById('contact-form') as HTMLFormElement;
@@ -94,12 +92,12 @@
         const formStatus = document.getElementById('form-status');
         const turnstileWidget = document.getElementById('turnstile-widget');
 
-        if (!form || !submitBtn || !formStatus) return;
+        if (!form || !submitBtn || !formStatus || !turnstileWidget) return;
 
         if (form.dataset.initialized === 'true') return;
         form.dataset.initialized = 'true';
 
-        let turnstileId: string | undefined;
+        let turnstileId: any;
         let isSubmitting = false;
         let currentToken: string | null = null;
 
@@ -125,11 +123,10 @@
             }
         };
 
-        const renderTurnstile = () => {
-            if ((window as any).turnstile && turnstileWidget && turnstileId === undefined) {
+        const renderWidget = () => {
+            if ((window as any).turnstile && turnstileId === undefined) {
                 turnstileId = (window as any).turnstile.render(turnstileWidget, {
                     sitekey: '0x4AAAAAACqH2g4WiqJ-5q1M',
-                    size: 'invisible',
                     callback: (token: string) => {
                         currentToken = token;
                     },
@@ -147,15 +144,19 @@
             }
         };
 
-        if ((window as any).turnstile) {
-            renderTurnstile();
-        } else {
-            (window as any).onloadTurnstileCallback = renderTurnstile;
-        }
+        let attempts = 0;
+        const checkTurnstile = setInterval(() => {
+            if ((window as any).turnstile) {
+                clearInterval(checkTurnstile);
+                renderWidget();
+            }
+            if (attempts++ > 50) clearInterval(checkTurnstile);
+        }, 100);
 
         document.addEventListener('astro:before-swap', () => {
             if ((window as any).turnstile && turnstileId !== undefined) {
                 (window as any).turnstile.remove(turnstileId);
+                turnstileId = undefined;
             }
         }, { once: true });
 
