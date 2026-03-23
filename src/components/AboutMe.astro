@@ -76,13 +76,13 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         <div class="space-y-6 text-base leading-relaxed text-gray-600 dark:text-zinc-400 lg:col-span-2 transition-colors duration-300">
             <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">Background & Evolution</h3>
             <p>
-                Hello, I am Iago Fernández Perlo. My trajectory in engineering began in childhood, driven by a natural curiosity for logic, mathematics, and physical creation. I spent my early years tinkering with Arduino boards, building simple machines, and exploring block-based programming. This hands-on hardware experience quickly evolved into developing video game modifications, building early websites, and writing automated scripts for Linux environments.
+                Hello, I am Iago Fernandez Perlo. My trajectory in engineering began in childhood, driven by a natural curiosity for logic, mathematics, and physical creation. I spent my early years tinkering with Arduino boards, building simple machines, and exploring block-based programming. This hands-on hardware experience quickly evolved into developing video game modifications, building early websites, and writing automated scripts for Linux environments.
             </p>
             <p>
                 A rigorous foundation in analytical thinking was established through competitive problem solving. A broad passion for scientific inquiry led me to qualify for the national Mathematics, Physics, and Chemistry Olympiads, alongside <em>LigaMAT</em> (a competitive national mathematical league) and regional robotics competitions. This continuous search for optimal models culminated in graduating with the <em>Premio Extraordinario de Bachillerato</em> (Extraordinary High School Award) and achieving <em>Matrícula de Honor</em> (Highest Honors). Driven by these achievements, I enrolled in the Dual BSc in Mathematics and Computer Engineering.
             </p>
             <p>
-                As my technical scope broadened during my university studies, I developed a strong focus on cybersecurity. Utilizing distributions like Kali Linux and Parrot OS, I gained practical experience by participating in Capture The Flag (CTF) events and developing custom cryptographic utilities and reverse shells. To solidify these operational skills, I completed specialized coursework accredited by INCIBE (Spanish National Cybersecurity Institute). Furthermore, my ongoing Erasmus+ exchange at the University of Łódź has proven my capacity for rapid adaptation and effective communication within novel, dynamic international environments.
+                As my technical scope broadened during my university studies, I developed a strong focus on cybersecurity. Utilizing distributions like Kali Linux and Parrot OS, I gained practical experience by participating in Capture The Flag (CTF) events and developing custom cryptographic utilities and reverse shells. To solidify these operational skills, I completed specialized coursework accredited by INCIBE (Spanish National Cybersecurity Institute). Furthermore, my ongoing Erasmus+ exchange at the University of Lodz has proven my capacity for rapid adaptation and effective communication within novel, dynamic international environments.
             </p>
             <p>
                 Today, my core focus remains squarely on the intersection of low-level optimization and advanced mathematical algorithms. This is currently reflected in my work as a Software Engineering Intern at RAPOSa (CITMAGA). In this role, I leverage a strong mathematical background in optimization to integrate low-level solver APIs into the core software architecture. By engineering solutions in C++, I bridge the gap between theoretical mathematics and high-performance software execution, demanding strict minimization of temporal and spatial complexity.
@@ -120,7 +120,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-<button aria-label="Scroll left" class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button aria-label="Scroll left" class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
@@ -128,7 +128,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
             <div class="animate-carousel-core flex w-max items-center h-full">
                 {duplicatedCore.map(tech => (
-                    <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                    <div class="icon-card group/icon select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu [&.is-hovered>div]:-translate-y-3 [&.is-hovered>span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             <div class="h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                         </div>
@@ -163,7 +163,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
             <div class="animate-carousel-infra flex w-max items-center h-full">
                 {duplicatedInfra.map(tech => (
-                    <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                    <div class="icon-card group/icon select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu [&.is-hovered>div]:-translate-y-3 [&.is-hovered>span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             <div class="h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                         </div>
@@ -190,7 +190,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             
-<button aria-label="Scroll left" class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
+            <button aria-label="Scroll left" class="btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 lg:group-hover/slider:opacity-100 cursor-pointer border-none outline-none">
                 <svg class="h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300 group-hover/btn:text-blue-600 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
@@ -198,7 +198,7 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
             <div class="animate-carousel-extra flex w-max items-center h-full">
                 {duplicatedExtra.map(tech => (
-                    <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu translate-z-0 [&.is-hovered>div]:-translate-y-3 [&.is-hovered_i]:text-blue-600 dark:[&.is-hovered_i]:text-blue-400 [&.is-hovered_span]:opacity-100">
+                    <div class="icon-card group/icon select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] h-full mr-16 transform-gpu [&.is-hovered>div]:-translate-y-3 [&.is-hovered>span]:opacity-100">
                         <div class="pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                             <div class="h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300 [.is-hovered_&]:bg-blue-600 dark:[.is-hovered_&]:bg-blue-400" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                         </div>
@@ -215,43 +215,43 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
 <script>
     document.addEventListener('astro:page-load', () => {
-        let mouseX = -1;
-        let mouseY = -1;
-        let isAccelerating = false;
-        let currentlyHovered = false;
-        
-        const mouseMoveHandler = (e: MouseEvent) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        };
-        document.addEventListener('mousemove', mouseMoveHandler);
-        
-        const intervalId = setInterval(() => {
-            if (mouseX === -1 || mouseY === -1) return;
+        let mouseX = 0;
+        let mouseY = 0;
+        let isPointerOverContainer = false;
+        let activeHoverCard = null;
+        let rafId = null;
 
-            const hoveredEl = document.elementFromPoint(mouseX, mouseY);
-            let anyHovered = false;
-
-            document.querySelectorAll('.icon-card').forEach(card => {
-                if (hoveredEl && card.contains(hoveredEl)) {
-                    card.classList.add('is-hovered');
-                    anyHovered = true;
-                } else {
-                    card.classList.remove('is-hovered');
-                }
-            });
-
-            if (anyHovered !== currentlyHovered) {
-                currentlyHovered = anyHovered;
-                if (!isAccelerating) {
-                    document.querySelectorAll('.animate-carousel-core, .animate-carousel-infra, .animate-carousel-extra').forEach(track => {
-                        track.getAnimations().forEach(anim => {
-                            anim.playbackRate = currentlyHovered ? 0.5 : 1.0;
-                        });
-                    });
-                }
+        const updatePointerCoordinates = (e) => {
+            if (e.touches && e.touches.length > 0) {
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+            } else {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
             }
-        }, 50);
+        };
+
+        const executeHoverDetectionLoop = () => {
+            if (!isPointerOverContainer) {
+                if (activeHoverCard) {
+                    activeHoverCard.classList.remove('is-hovered');
+                    activeHoverCard = null;
+                }
+                rafId = null;
+                return;
+            }
+
+            const topElement = document.elementFromPoint(mouseX, mouseY);
+            const foundCard = topElement ? topElement.closest('.icon-card') : null;
+
+            if (foundCard !== activeHoverCard) {
+                if (activeHoverCard) activeHoverCard.classList.remove('is-hovered');
+                if (foundCard) foundCard.classList.add('is-hovered');
+                activeHoverCard = foundCard;
+            }
+
+            rafId = requestAnimationFrame(executeHoverDetectionLoop);
+        };
 
         const carousels = document.querySelectorAll('.carousel-container');
 
@@ -260,58 +260,84 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             const leftBtn = container.querySelector('.btn-left');
             const rightBtn = container.querySelector('.btn-right');
             
-            if(!track) return;
+            if (!track) return;
 
-            const accelerate = (e) => {
+            let isAccelerating = false;
+
+            const updatePlaybackRate = () => {
+                const anims = track.getAnimations();
+                if (anims.length === 0) return;
+
+                let rate = 1.0;
+                if (isAccelerating) {
+                    rate = 4.0;
+                } else if (isPointerOverContainer) {
+                    rate = 0.5;
+                }
+
+                anims.forEach(anim => {
+                    anim.playbackRate = rate;
+                });
+            };
+
+            const startHoverTracking = (e) => {
+                isPointerOverContainer = true;
+                updatePointerCoordinates(e);
+                updatePlaybackRate();
+                if (!rafId) {
+                    rafId = requestAnimationFrame(executeHoverDetectionLoop);
+                }
+            };
+
+            const stopHoverTracking = () => {
+                isPointerOverContainer = false;
+                updatePlaybackRate();
+            };
+
+            container.addEventListener('pointerenter', startHoverTracking);
+            container.addEventListener('pointermove', updatePointerCoordinates);
+            container.addEventListener('pointerleave', stopHoverTracking);
+
+            const startAccelerating = (e) => {
+                if (e.cancelable) e.preventDefault();
                 e.stopPropagation();
                 isAccelerating = true;
-                const anims = track.getAnimations();
-                anims.forEach(anim => { anim.playbackRate = 4.0; });
-
-                void track.offsetWidth;
+                updatePlaybackRate();
             };
 
-            const resetSpeed = (e) => {
+            const stopAccelerating = (e) => {
+                if (e.cancelable) e.preventDefault();
                 e.stopPropagation();
                 isAccelerating = false;
-                const anims = track.getAnimations();
-                anims.forEach(anim => { anim.playbackRate = currentlyHovered ? 0.5 : 1.0; });
-                
-                void track.offsetWidth;
+                updatePlaybackRate();
             };
 
-            if(leftBtn) {
-                leftBtn.addEventListener('mousedown', accelerate);
-                leftBtn.addEventListener('mouseup', resetSpeed);
-                leftBtn.addEventListener('mouseleave', resetSpeed);
-                leftBtn.addEventListener('touchstart', accelerate, { passive: true });
-                leftBtn.addEventListener('touchend', resetSpeed);
-            }
-
-            if(rightBtn) {
-                rightBtn.addEventListener('mousedown', accelerate);
-                rightBtn.addEventListener('mouseup', resetSpeed);
-                rightBtn.addEventListener('mouseleave', resetSpeed);
-                rightBtn.addEventListener('touchstart', accelerate, { passive: true });
-                rightBtn.addEventListener('touchend', resetSpeed);
+            const btn = leftBtn || rightBtn;
+            if (btn) {
+                btn.addEventListener('pointerdown', startAccelerating);
+                btn.addEventListener('pointerup', stopAccelerating);
+                btn.addEventListener('pointerleave', stopAccelerating);
+                btn.addEventListener('pointercancel', stopAccelerating);
             }
         });
-
+        
         document.addEventListener('astro:before-swap', () => {
-            clearInterval(intervalId);
-            document.removeEventListener('mousemove', mouseMoveHandler);
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
         }, { once: true });
     });
 </script>
 
 <style>
     @keyframes carousel-left {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-50%, 0, 0); }
     }
     @keyframes carousel-right {
-        0% { transform: translateX(-50%); }
-        100% { transform: translateX(0); }
+        0% { transform: translate3d(-50%, 0, 0); }
+        100% { transform: translate3d(0, 0, 0); }
     }
     .animate-carousel-core {
         animation: carousel-left 65s linear infinite;
