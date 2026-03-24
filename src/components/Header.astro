@@ -1,25 +1,41 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
 
+const prefix = lang === 'en' ? '' : `/${lang}`;
+
 const navLinks = [
-    { name: 'About', url: '/about' },
-    { name: 'Experience', url: '/experience' },
-    { name: 'Projects', url: '/projects' },
-    { name: 'Contact', url: '/contact' }
+    { name: t('nav.about'), url: `${prefix}/about` },
+    { name: t('nav.experience'), url: `${prefix}/experience` },
+    { name: t('nav.projects'), url: `${prefix}/projects` },
+    { name: t('nav.contact'), url: `${prefix}/contact` }
 ];
 
 const isActive = (url: string) => {
-    return currentPath === url || currentPath === url + '/';
+    const path = currentPath.replace(/\/$/, '');
+    const target = url.replace(/\/$/, '');
+    return path === target || (path === '' && target === '');
+};
+
+const getLocalizedPath = (targetLang: string) => {
+    if (targetLang === lang) return currentPath;
+    if (targetLang === 'es') return `/es${currentPath === '/' ? '' : currentPath}`;
+    if (targetLang === 'en') return currentPath.replace(/^\/es/, '') || '/';
+    return currentPath;
 };
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 border-b border-zinc-200 bg-white/90 dark:border-zinc-700 dark:bg-zinc-800/90 backdrop-blur-lg shadow-sm dark:shadow-black/20 transition-colors duration-300">
     <nav class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-12" aria-label="Global">
-        <a href="/" class="text-xl font-extrabold tracking-tighter text-zinc-900 dark:text-zinc-100 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+        <a href={prefix || '/'} class="text-xl font-extrabold tracking-tighter text-zinc-900 dark:text-zinc-100 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             iago<span class="font-medium text-blue-600 dark:text-blue-400">fernandez</span>
         </a>
-        <div class="flex items-center gap-x-4 sm:gap-x-6">
-            <div class="hidden sm:flex gap-x-6">
+        
+        <div class="flex items-center">
+            <div class="hidden sm:flex items-center gap-x-6 mr-5">
                 {navLinks.map((link) => (
                     <a 
                         href={link.url} 
@@ -31,23 +47,31 @@ const isActive = (url: string) => {
                 ))}
             </div>
             
-            <button id="theme-toggle" type="button" class="rounded-lg p-2.5 text-sm text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Toggle Dark Mode">
-                <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-                <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                </svg>
-            </button>
+            <div class="hidden sm:block h-5 w-px bg-zinc-300 dark:bg-zinc-700 mr-3 transition-colors duration-300"></div>
+            
+            <div class="flex items-center gap-x-1 sm:gap-x-2">
+                <a href={getLocalizedPath(lang === 'en' ? 'es' : 'en')} class="rounded-lg px-2.5 py-2 text-xs font-bold text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors cursor-pointer">
+                    {lang === 'en' ? 'ES' : 'EN'}
+                </a>
 
-            <button id="mobile-menu-toggle" type="button" class="sm:hidden rounded-lg p-2.5 text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Open main menu">
-                <svg id="menu-open-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-                <svg id="menu-close-icon" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+                <button id="theme-toggle" type="button" class="rounded-lg p-2 text-sm text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Toggle Dark Mode">
+                    <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <button id="mobile-menu-toggle" type="button" class="sm:hidden rounded-lg p-2 text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors outline-none cursor-pointer" aria-label="Open main menu">
+                    <svg id="menu-open-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <svg id="menu-close-icon" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 

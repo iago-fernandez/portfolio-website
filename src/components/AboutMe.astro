@@ -1,13 +1,18 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const education = [
     {
         institution: 'Universidade de Santiago de Compostela',
-        degree: 'Dual BSc in Mathematics & Computer Engineering',
+        degree: t('about.edu.degree1'),
         years: '2020 - 2027'
     },
     {
-        institution: 'University of Łódź',
-        degree: 'Erasmus+ Exchange Program',
+        institution: 'University of Lodz',
+        degree: t('about.edu.degree2'),
         years: '2025 - 2026'
     }
 ];
@@ -69,31 +74,21 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
 <section class="py-20 animate-fade-in-up">
     <h2 class="mb-12 text-3xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 sm:text-4xl transition-colors duration-300">
-        About Me & Technical Trajectory
+        {t('about.title')}
     </h2>
     
     <div class="grid gap-12 lg:grid-cols-3">
         <div class="space-y-6 text-base leading-relaxed text-gray-600 dark:text-zinc-400 lg:col-span-2 transition-colors duration-300">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">Background & Evolution</h3>
-            <p>
-                Hello, I am Iago Fernandez Perlo. My trajectory in engineering began in childhood, driven by a natural curiosity for logic, mathematics, and physical creation. I spent my early years tinkering with Arduino boards, building simple machines, and exploring block-based programming. This hands-on hardware experience quickly evolved into developing video game modifications, building early websites, and writing automated scripts for Linux environments.
-            </p>
-            <p>
-                A rigorous foundation in analytical thinking was established through competitive problem solving. A broad passion for scientific inquiry led me to qualify for the national Mathematics, Physics, and Chemistry Olympiads, alongside <em>LigaMAT</em> (a competitive national mathematical league) and regional robotics competitions. This continuous search for optimal models culminated in graduating with the <em>Premio Extraordinario de Bachillerato</em> (Extraordinary High School Award) and achieving <em>Matrícula de Honor</em> (Highest Honors). Driven by these achievements, I enrolled in the Dual BSc in Mathematics and Computer Engineering.
-            </p>
-            <p>
-                As my technical scope broadened during my university studies, I developed a strong focus on cybersecurity. Utilizing distributions like Kali Linux and Parrot OS, I gained practical experience by participating in Capture The Flag (CTF) events and developing custom cryptographic utilities and reverse shells. To solidify these operational skills, I completed specialized coursework accredited by INCIBE (Spanish National Cybersecurity Institute). Furthermore, my ongoing Erasmus+ exchange at the University of Lodz has proven my capacity for rapid adaptation and effective communication within novel, dynamic international environments.
-            </p>
-            <p>
-                Today, my core focus remains squarely on the intersection of low-level optimization and advanced mathematical algorithms. This is currently reflected in my work as a Software Engineering Intern at RAPOSa (CITMAGA). In this role, I leverage a strong mathematical background in optimization to integrate low-level solver APIs into the core software architecture. By engineering solutions in C++, I bridge the gap between theoretical mathematics and high-performance software execution, demanding strict minimization of temporal and spatial complexity.
-            </p>
-            <p>
-                Looking ahead, I am focused on completing my dual degree and transitioning into a professional role that leverages this unique intersection of disciplines. I am actively exploring opportunities in high-performance computing, low-level systems engineering, and the development of mission-critical software. I am also considering specialized Master's programs to further deepen my technical expertise in advanced computational models and algorithmic optimization.
-            </p>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">{t('about.bg.title')}</h3>
+            <p>{t('about.bg.p1')}</p>
+            <p>{t('about.bg.p2')}</p>
+            <p>{t('about.bg.p3')}</p>
+            <p>{t('about.bg.p4')}</p>
+            <p>{t('about.bg.p5')}</p>
         </div>
 
         <div class="space-y-6">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">Academic Foundation</h3>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">{t('about.academic.title')}</h3>
             <div class="space-y-6">
                 {education.map(edu => (
                     <div class="rounded-lg border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5 shadow-sm transition-all hover:shadow-md dark:hover:shadow-blue-900/10">
@@ -108,10 +103,10 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
     
     <div class="mt-16 mb-6">
         <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
-            Core Languages & Mathematical Tools
+            {t('about.core.title')}
         </h3>
         <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">
-            The foundational syntax utilized for high-performance execution, memory management, and rigorous mathematical modeling.
+            {t('about.core.desc')}
         </p>
     </div>
     
@@ -143,10 +138,10 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
     <div class="mt-12 mb-6">
         <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
-            Systems, Infrastructure & Compilation
+            {t('about.sys.title')}
         </h3>
         <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">
-            The architectural environments, build systems, and orchestration tools utilized to deploy and maintain robust engineering solutions.
+            {t('about.sys.desc')}
         </p>
     </div>
     
@@ -178,10 +173,10 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
     <div class="mt-12 mb-6">
         <h3 class="text-xl font-bold text-gray-900 dark:text-zinc-200 transition-colors duration-300">
-            Versatility & Additional Ecosystems
+            {t('about.vers.title')}
         </h3>
         <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">
-            Complementary libraries and frameworks managed for data analysis, graphical rendering, and comprehensive full-stack development.
+            {t('about.vers.desc')}
         </p>
     </div>
     

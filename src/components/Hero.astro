@@ -1,10 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import profileImage from '../assets/profile.webp';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const githubUrl = "https://github.com/iago-fernandez";
 const linkedinUrl = "https://linkedin.com/in/iago-fernandez-perlo/";
-const cvUrl = "/resume.pdf";
+const cvUrl = lang === 'es' ? '/[ES]CV_Iago_Fernandez.pdf' : '/[EN]CV_Iago_Fernandez.pdf';
 ---
 
 <section id="hero-container" class="relative w-full overflow-hidden pt-8 pb-20 bg-zinc-50 dark:bg-zinc-900">
@@ -16,16 +20,16 @@ const cvUrl = "/resume.pdf";
                     Iago Fernandez
                 </h1>
                 <h2 class="mt-4 text-xl font-semibold text-zinc-700 dark:text-zinc-300 sm:text-2xl xl:text-3xl transition-colors duration-300">
-                    Dual BSc in Mathematics & Computer Engineering
+                    {t('hero.subtitle')}
                 </h2>
                 <div class="mt-6 max-w-3xl animation-delay-200">
                     <p class="text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg transition-colors duration-300 text-pretty">
-                        Bridging theoretical mathematics and low-level software engineering to build high-performance computing systems, concurrent architectures, and mission-critical applications. My primary focus lies in maximizing temporal and spatial efficiency, optimizing memory management, and executing complex algorithmic&nbsp;models.
+                        {t('hero.description')}
                     </p>
                 </div>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4 animation-delay-400 w-full sm:w-auto">
                     <a href={cvUrl} target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center rounded-md bg-zinc-900 px-6 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 hover:shadow-lg active:translate-y-0">
-                        View Curriculum
+                        {t('hero.cv')}
                     </a>
                     <div class="flex flex-row gap-4 w-full sm:w-auto">
                         <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="inline-flex flex-1 sm:flex-none items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-6 py-3 text-sm font-medium text-zinc-900 dark:text-zinc-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:shadow-lg active:translate-y-0">
@@ -131,7 +135,6 @@ const cvUrl = "/resume.pdf";
                 
                 if (distMouse < 200 && distMouse > 0) {
                     const force = (200 - distMouse) / 200;
-                    
                     this.x -= (dxMouse / distMouse) * force * 3.5;
                     this.y -= (dyMouse / distMouse) * force * 3.5;
                 }
@@ -159,9 +162,12 @@ const cvUrl = "/resume.pdf";
 
         const updateCanvasConfiguration = () => {
             const currentWidth = window.innerWidth;
+            const currentHeight = container.offsetHeight;
+            const area = currentWidth * currentHeight;
+            
+            const targetCount = Math.max(50, Math.floor(area * 0.00010));
             const scale = Math.max(0.6, Math.min(1, currentWidth / 1200));
             
-            const targetCount = Math.floor(120 * scale);
             connectionRadius = 150 * scale;
             mouseInteractionRadius = 220 * scale;
             connDivisor = 500 * scale;
@@ -219,13 +225,14 @@ const cvUrl = "/resume.pdf";
                     }
                 }
             }
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
         }
         animate();
         
         document.addEventListener('astro:before-swap', () => {
             cancelAnimationFrame(animationId);
             resizeObserver.disconnect();
+            particles = [];
             
             if (container) {
                 container.removeEventListener('mousemove', updateMousePosition as EventListener);
