@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const prefix = lang === 'en' ? '' : `/${lang}`;
+
+const directory = [
+    {
+        title: t('dir.about.title'),
+        description: t('dir.about.desc'),
+        link: `${prefix}/about`,
+        icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z'
+    },
+    {
+        title: t('dir.exp.title'),
+        description: t('dir.exp.desc'),
+        link: `${prefix}/experience`,
+        icon: 'M20.25 14.15v4.25c0 1.094-.896 1.989-1.99 1.989H5.74c-1.094 0-1.99-.895-1.99-1.989v-4.25m16.5 0a4.81 4.81 0 01-1.65 3.65m-14.85-3.65a4.81 4.81 0 001.65 3.65m14.85-3.65V10.5c0-1.094-.896-1.989-1.99-1.989H5.74c-1.094 0-1.99.895-1.99 1.989v3.65m16.5 0a4.81 4.81 0 01-1.65 3.65m-14.85-3.65a4.81 4.81 0 001.65 3.65m-10.5-3.65v-3.65m0 0a2.25 2.25 0 012.25-2.25h3.5a2.25 2.25 0 012.25 2.25v3.65m-8 0h8'
+    },
+    {
+        title: t('dir.proj.title'),
+        description: t('dir.proj.desc'),
+        link: `${prefix}/projects`,
+        icon: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5'
+    },
+    {
+        title: t('dir.contact.title'),
+        description: t('dir.contact.desc'),
+        link: `${prefix}/contact`,
+        icon: 'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
+    }
+];
+---
+
+<Layout title={t('index.title')} description={t('index.desc')}>
+    <Hero />
+    
+    <div class="w-full border-t border-zinc-200 dark:border-zinc-700 transition-colors duration-300"></div>
+    
+    <section class="w-full pb-24 pt-16">
+        <div class="mx-auto max-w-7xl px-6 sm:px-12 animate-fade-in-up animation-delay-400">
+            <h3 class="mb-10 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+                {t('index.directory')}
+            </h3>
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {directory.map((item) => (
+                    <a href={item.link} class="group relative flex flex-col justify-between rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/50 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 dark:hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-900/5 dark:hover:shadow-blue-900/10">
+                        <div>
+                            <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 dark:bg-zinc-800 text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover:bg-blue-600 dark:group-hover:bg-blue-500 group-hover:text-white dark:group-hover:text-white">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon} />
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-bold text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+                                {item.title}
+                            </h4>
+                            <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 transition-colors duration-300">
+                                {item.description}
+                            </p>
+                        </div>
+                        <div class="mt-8 flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            {t('index.viewDetails')} 
+                            <svg class="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+</Layout>
