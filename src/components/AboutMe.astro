@@ -241,51 +241,51 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             );
 
             let isAccelerating = false;
-            let isHovering = false;
+            let isHoveringContainer = false;
+            let isHoveringIcon = false;
 
             const updateRate = () => {
-                if (isAccelerating) {
-                    animation.playbackRate = 4.0;
-                } else if (isHovering) {
-                    animation.playbackRate = 0.5;
+                let targetRate = 1.0;
+                
+                if (isHoveringIcon) targetRate = 0.0; 
+                else if (isAccelerating) targetRate = 4.0;
+                else if (isHoveringContainer) targetRate = 0.5;
+                
+                if (animation.updatePlaybackRate) {
+                    animation.updatePlaybackRate(targetRate);
                 } else {
-                    animation.playbackRate = 1.0;
+                    animation.playbackRate = targetRate;
+                }
+                
+                if (targetRate === 0.0) {
+                    animation.pause();
+                } else if (animation.playState === 'paused') {
+                    animation.play();
                 }
             };
 
-            const startHover = () => { isHovering = true; updateRate(); };
-            const stopHover = () => { isHovering = false; updateRate(); };
+            container.addEventListener('pointerenter', () => { isHoveringContainer = true; updateRate(); });
+            container.addEventListener('pointerleave', () => { isHoveringContainer = false; updateRate(); });
             
-            container.addEventListener('pointerenter', startHover);
-            container.addEventListener('pointerleave', stopHover);
-            
-            container.addEventListener('touchstart', startHover, { passive: true });
-            container.addEventListener('touchend', stopHover, { passive: true });
-            container.addEventListener('touchcancel', stopHover, { passive: true });
-
-            const startAccelerating = (e) => {
-                if (e.cancelable) e.preventDefault();
-                e.stopPropagation();
-                isAccelerating = true;
-                updateRate();
-            };
-
-            const stopAccelerating = (e) => {
-                if (e.cancelable) e.preventDefault();
-                e.stopPropagation();
-                isAccelerating = false;
-                updateRate();
-            };
+            const icons = track.querySelectorAll('.icon-card');
+            icons.forEach(icon => {
+                icon.addEventListener('pointerenter', () => { isHoveringIcon = true; updateRate(); });
+                icon.addEventListener('pointerleave', () => { isHoveringIcon = false; updateRate(); });
+            });
 
             const btn = leftBtn || rightBtn;
             if (btn) {
-                btn.addEventListener('pointerdown', startAccelerating);
-                btn.addEventListener('pointerup', stopAccelerating);
-                btn.addEventListener('pointerleave', stopAccelerating);
-                btn.addEventListener('pointercancel', stopAccelerating);
+                btn.addEventListener('pointerdown', () => { isAccelerating = true; updateRate(); });
                 
-                btn.addEventListener('touchstart', startAccelerating, { passive: true });
-                btn.addEventListener('touchend', stopAccelerating, { passive: true });
+                const stopAcc = () => { isAccelerating = false; updateRate(); };
+                
+                btn.addEventListener('pointerup', stopAcc);
+                btn.addEventListener('pointerleave', stopAcc);
+                btn.addEventListener('pointercancel', stopAcc);
+                
+                btn.addEventListener('contextmenu', (e) => {
+                    if (e.cancelable) e.preventDefault();
+                });
             }
         });
     });
