@@ -116,9 +116,9 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             </svg>
         </button>
 
-        <div class="animate-carousel-track flex w-max items-center h-full will-change-transform" data-duration="65000" data-direction="left">
+        <div class="animate-carousel-track flex w-max items-center h-full" data-duration="65000" data-direction="left">
             {duplicatedCore.map(tech => (
-                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16 transform-gpu">
+                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16">
                     <div class="icon-box pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                         <div class="icon-mask h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                     </div>
@@ -143,9 +143,9 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             </svg>
         </button>
 
-        <div class="animate-carousel-track flex w-max items-center h-full will-change-transform" data-duration="70000" data-direction="right">
+        <div class="animate-carousel-track flex w-max items-center h-full" data-duration="70000" data-direction="right">
             {duplicatedInfra.map(tech => (
-                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16 transform-gpu">
+                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16">
                     <div class="icon-box pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                         <div class="icon-mask h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                     </div>
@@ -170,9 +170,9 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
             </svg>
         </button>
 
-        <div class="animate-carousel-track flex w-max items-center h-full will-change-transform" data-duration="70000" data-direction="left">
+        <div class="animate-carousel-track flex w-max items-center h-full" data-duration="70000" data-direction="left">
             {duplicatedExtra.map(tech => (
-                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16 transform-gpu">
+                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16">
                     <div class="icon-box pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                         <div class="icon-mask h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                     </div>
@@ -319,6 +319,15 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 </script>
 
 <style>
+    .animate-carousel-track {
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+
     .action-btn {
         touch-action: none;
         -webkit-touch-callout: none;
@@ -331,6 +340,9 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         -webkit-user-select: none;
         user-select: none;
         -webkit-user-drag: none;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
     }
     
     .icon-card.is-hovered .icon-box {
