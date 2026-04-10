@@ -106,19 +106,19 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">{t('about.core.desc')}</p>
     </div>
     
-    <div class="carousel-container relative border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300 h-28 overflow-hidden flex w-[100vw] max-w-[100vw]" style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
+    <div class="carousel-wrapper relative border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300 h-28 overflow-hidden flex w-[100vw] max-w-[100vw]" style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
         <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
         
-        <button aria-label="Scroll left" class="action-btn cursor-pointer btn-left absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 border-none outline-none">
-            <svg class="pointer-events-none h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button aria-label="Scroll left" class="action-btn cursor-pointer btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-transparent to-transparent opacity-100 lg:opacity-0 transition-all duration-300 hover:from-sky-100/50 dark:hover:from-blue-900/40 border-none outline-none">
+            <svg aria-hidden="true" class="pointer-events-none h-6 w-6 text-zinc-400 transition-all duration-300 group-hover/btn:text-sky-500 dark:text-zinc-500 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
             </svg>
         </button>
 
-        <div class="animate-carousel-track flex w-max items-center h-full" data-duration="65000" data-direction="left">
+        <div class="animate-carousel-track flex w-max items-center h-full will-change-transform" data-duration="65000" data-direction="left">
             {duplicatedCore.map(tech => (
-                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16">
+                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16 transform-gpu">
                     <div class="icon-box pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                         <div class="icon-mask h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                     </div>
@@ -133,19 +133,19 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">{t('about.sys.desc')}</p>
     </div>
     
-    <div class="carousel-container relative border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300 h-28 overflow-hidden flex w-[100vw] max-w-[100vw]" style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
+    <div class="carousel-wrapper relative border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300 h-28 overflow-hidden flex w-[100vw] max-w-[100vw]" style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
         <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
         
-        <button aria-label="Scroll right" class="action-btn cursor-pointer btn-right absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 border-none outline-none">
-            <svg class="pointer-events-none h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button aria-label="Scroll right" class="action-btn cursor-pointer btn-right group/btn absolute h-full top-0 bottom-0 right-0 z-20 w-12 flex items-center justify-center bg-gradient-to-l from-transparent to-transparent opacity-100 lg:opacity-0 transition-all duration-300 hover:from-sky-100/50 dark:hover:from-blue-900/40 border-none outline-none">
+            <svg aria-hidden="true" class="pointer-events-none h-6 w-6 text-zinc-400 transition-all duration-300 group-hover/btn:text-sky-500 dark:text-zinc-500 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
             </svg>
         </button>
 
-        <div class="animate-carousel-track flex w-max items-center h-full" data-duration="70000" data-direction="right">
+        <div class="animate-carousel-track flex w-max items-center h-full will-change-transform" data-duration="70000" data-direction="right">
             {duplicatedInfra.map(tech => (
-                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16">
+                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16 transform-gpu">
                     <div class="icon-box pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                         <div class="icon-mask h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                     </div>
@@ -160,19 +160,19 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         <p class="mt-2 text-sm text-gray-600 dark:text-zinc-400 transition-colors duration-300">{t('about.vers.desc')}</p>
     </div>
     
-    <div class="carousel-container relative border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300 h-28 overflow-hidden flex w-[100vw] max-w-[100vw]" style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
+    <div class="carousel-wrapper relative border-y border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 py-0 transition-colors duration-300 h-28 overflow-hidden flex w-[100vw] max-w-[100vw]" style="margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);">
         <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-900 to-transparent"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-900 to-transparent"></div>
         
-        <button aria-label="Scroll left" class="action-btn cursor-pointer btn-left absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-zinc-200/60 to-transparent dark:from-zinc-800/40 opacity-100 lg:opacity-0 transition-all duration-300 hover:from-blue-300/70 dark:hover:from-blue-900/40 border-none outline-none">
-            <svg class="pointer-events-none h-6 w-6 text-zinc-500 dark:text-zinc-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button aria-label="Scroll left" class="action-btn cursor-pointer btn-left group/btn absolute h-full top-0 bottom-0 left-0 z-20 w-12 flex items-center justify-center bg-gradient-to-r from-transparent to-transparent opacity-100 lg:opacity-0 transition-all duration-300 hover:from-sky-100/50 dark:hover:from-blue-900/40 border-none outline-none">
+            <svg aria-hidden="true" class="pointer-events-none h-6 w-6 text-zinc-400 transition-all duration-300 group-hover/btn:text-sky-500 dark:text-zinc-500 dark:group-hover/btn:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
             </svg>
         </button>
 
-        <div class="animate-carousel-track flex w-max items-center h-full" data-duration="70000" data-direction="left">
+        <div class="animate-carousel-track flex w-max items-center h-full will-change-transform" data-duration="70000" data-direction="left">
             {duplicatedExtra.map(tech => (
-                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16">
+                <div class="icon-card select-none relative flex flex-col items-center justify-center cursor-pointer min-w-[100px] shrink-0 h-full mr-16 transform-gpu">
                     <div class="icon-box pointer-events-none flex h-full w-full items-center justify-center transition-transform duration-300">
                         <div class="icon-mask h-[48px] w-[48px] bg-gray-400 dark:bg-zinc-600 transition-colors duration-300" style={`-webkit-mask-image: url('${tech.icon}'); mask-image: url('${tech.icon}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}></div>
                     </div>
@@ -185,18 +185,18 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
 <script>
     document.addEventListener('astro:page-load', () => {
-        const containers = document.querySelectorAll('.carousel-container');
-        if (containers.length === 0) return;
+        const wrappers = document.querySelectorAll('.carousel-wrapper');
+        if (wrappers.length === 0) return;
 
         const pageController = new AbortController();
         document.addEventListener('astro:before-swap', () => pageController.abort(), { once: true });
 
         const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
-        containers.forEach(container => {
-            const track = container.querySelector('.animate-carousel-track');
-            const btnLeft = container.querySelector('.btn-left');
-            const btnRight = container.querySelector('.btn-right');
+        wrappers.forEach(wrapper => {
+            const track = wrapper.querySelector('.animate-carousel-track');
+            const btnLeft = wrapper.querySelector('.btn-left');
+            const btnRight = wrapper.querySelector('.btn-right');
             const btn = btnLeft || btnRight;
             
             if (!track) return;
@@ -258,23 +258,25 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 let localMouseX = -100;
                 let localMouseY = -100;
 
-                container.addEventListener('pointermove', (e) => {
+                wrapper.addEventListener('pointermove', (e) => {
                     localMouseX = e.clientX;
                     localMouseY = e.clientY;
                 });
 
-                container.addEventListener('pointerenter', () => {
+                wrapper.addEventListener('pointerenter', () => {
                     isHoveringContainer = true;
+                    wrapper.classList.add('hovering-container');
                     syncAnimation();
                 });
                 
-                container.addEventListener('pointerleave', () => {
+                wrapper.addEventListener('pointerleave', () => {
                     isHoveringContainer = false;
+                    wrapper.classList.remove('hovering-container');
                     syncAnimation();
                 });
 
                 const tick = () => {
-                    if (!container.isConnected) return;
+                    if (!wrapper.isConnected) return;
 
                     let currentHover = null;
                     if (isHoveringContainer && !isAccelerating) {
@@ -362,21 +364,21 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
     }
     
     .action-btn.is-pressed.btn-left {
-        background-image: linear-gradient(to right, rgba(96, 165, 250, 0.8), transparent) !important;
+        background-image: linear-gradient(to right, rgba(56, 189, 248, 0.25), transparent) !important;
     }
     
     .action-btn.is-pressed.btn-right {
-        background-image: linear-gradient(to left, rgba(96, 165, 250, 0.8), transparent) !important;
+        background-image: linear-gradient(to left, rgba(56, 189, 248, 0.25), transparent) !important;
     }
 
     .action-btn.is-pressed svg {
-        color: rgb(29, 78, 216) !important; 
-        transform: scale(1.1);
-        transition: transform 150ms ease;
+        color: rgb(14, 165, 233) !important; 
+        transform: scale(1.2);
+        transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), color 150ms ease;
     }
 
     @media (hover: hover) and (pointer: fine) {
-        .carousel-container:hover .action-btn {
+        .carousel-wrapper.hovering-container .action-btn {
             opacity: 1 !important;
             transition: opacity 300ms ease;
         }
@@ -388,15 +390,15 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         }
 
         .action-btn.is-pressed.btn-left {
-            background-image: linear-gradient(to right, rgba(30, 64, 175, 0.8), transparent) !important;
+            background-image: linear-gradient(to right, rgba(30, 58, 138, 0.6), transparent) !important;
         }
         
         .action-btn.is-pressed.btn-right {
-            background-image: linear-gradient(to left, rgba(30, 64, 175, 0.8), transparent) !important;
+            background-image: linear-gradient(to left, rgba(30, 58, 138, 0.6), transparent) !important;
         }
         
         .action-btn.is-pressed svg {
-            color: rgb(147, 197, 253) !important;
+            color: rgb(96, 165, 250) !important;
         }
     }
 </style>
