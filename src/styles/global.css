@@ -13,16 +13,19 @@
     .animation-delay-400 { animation-delay: 400ms; }
 
     .bg-grid-pattern {
-        background-size: 40px 40px;
+        background-size: 32px 32px;
         background-image: 
-            linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        
+        mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 20%, transparent 90%);
+        -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 20%, transparent 90%);
     }
     
     .dark .bg-grid-pattern {
         background-image: 
-            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     }
 }
 
