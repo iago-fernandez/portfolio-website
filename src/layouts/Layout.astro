@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { title, description, image = '/og-image.png' } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iagofernandez.com');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iagofernandez.dev');
 const lang = getLangFromUrl(Astro.url);
 ---
 
@@ -31,7 +31,7 @@ const lang = getLangFromUrl(Astro.url);
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={new URL(image, Astro.site || 'https://iagofernandez.com')} />
+        <meta property="og:image" content={new URL(image, Astro.site || 'https://iagofernandez.dev')} />
         
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
