@@ -3,6 +3,13 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://iagofernandez.dev',
+  trailingSlash: 'never',
+  build: {
+    format: 'file'
+  },
+  prefetch: {
+    defaultStrategy: 'hover'
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],

@@ -21,16 +21,17 @@ const isActive = (url: string) => {
 };
 
 const getLocalizedPath = (targetLang: string) => {
-    if (targetLang === lang) return currentPath;
-    if (targetLang === 'es') return `/es${currentPath === '/' ? '' : currentPath}`;
-    if (targetLang === 'en') return currentPath.replace(/^\/es/, '') || '/';
-    return currentPath;
+    const cleanPath = currentPath.replace(/\/$/, '') || '/';
+    if (targetLang === lang) return cleanPath;
+    if (targetLang === 'es') return cleanPath === '/' ? '/es' : `/es${cleanPath}`;
+    if (targetLang === 'en') return cleanPath.replace(/^\/es(?=\/|$)/, '') || '/';
+    return cleanPath;
 };
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 border-b border-zinc-200 bg-white/90 dark:border-zinc-700 dark:bg-zinc-800/90 backdrop-blur-lg shadow-sm dark:shadow-black/20 transition-colors duration-300">
     <nav class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-12" aria-label="Global">
-        <a href={prefix || '/'} class="text-xl font-extrabold tracking-tighter text-zinc-900 dark:text-zinc-100 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+        <a href={prefix || '/'} data-astro-prefetch="viewport" class="text-xl font-extrabold tracking-tighter text-zinc-900 dark:text-zinc-100 transition-colors hover:text-blue-600 dark:hover:text-blue-400">
             iago<span class="font-medium text-blue-600 dark:text-blue-400">fernandez</span>
         </a>
         
@@ -39,7 +40,7 @@ const getLocalizedPath = (targetLang: string) => {
                 {navLinks.map((link) => (
                     <a 
                         href={link.url} 
-                        data-astro-prefetch="hover"
+                        data-astro-prefetch="viewport"
                         class={`text-sm font-semibold transition-all hover:text-zinc-900 dark:hover:text-zinc-100 ${isActive(link.url) ? 'text-zinc-900 dark:text-zinc-100 border-b-2 border-zinc-900 dark:border-zinc-100 pb-0.5' : 'text-zinc-500 dark:text-zinc-400'}`}
                     >
                         {link.name}
@@ -50,7 +51,7 @@ const getLocalizedPath = (targetLang: string) => {
             <div class="hidden sm:block h-5 w-px bg-zinc-300 dark:bg-zinc-700 mr-3 transition-colors duration-300"></div>
             
             <div class="flex items-center gap-x-1 sm:gap-x-2">
-                <a href={getLocalizedPath(lang === 'en' ? 'es' : 'en')} class="rounded-lg px-2.5 py-2 text-xs font-bold text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors cursor-pointer">
+                <a href={getLocalizedPath(lang === 'en' ? 'es' : 'en')} data-astro-prefetch="viewport" class="rounded-lg px-2.5 py-2 text-xs font-bold text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-100 transition-colors cursor-pointer">
                     {lang === 'en' ? 'ES' : 'EN'}
                 </a>
 
@@ -80,7 +81,7 @@ const getLocalizedPath = (targetLang: string) => {
             {navLinks.map((link) => (
                 <a 
                     href={link.url} 
-                    data-astro-prefetch="hover"
+                    data-astro-prefetch="viewport"
                     class={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive(link.url) ? 'bg-zinc-100 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100' : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-700/50 dark:hover:text-zinc-100'}`}
                 >
                     {link.name}
