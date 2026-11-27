@@ -53,62 +53,43 @@ const cvUrl = lang === 'es' ? '/[ES]CV_Iago_Fernandez.pdf' : '/[EN]CV_Iago_Ferna
 
 <script>
     document.addEventListener('astro:page-load', () => {
-        const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
+        const canvas = document.getElementById('network-canvas') as HTMLCanvasElement | null;
         const container = document.getElementById('hero-container');
         if (!canvas || !container) return;
-        
+
+        if (canvas.dataset.initialized === 'true') return;
+        canvas.dataset.initialized = 'true';
+
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const controller = new AbortController();
+        const { signal } = controller;
+
         let width = container.offsetWidth;
         let height = container.offsetHeight;
-        canvas.width = width;
-        canvas.height = height;
+        let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-        let particles: Particle[] = [];
+        const resizeCanvas = () => {
+            width = container.offsetWidth;
+            height = container.offsetHeight;
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        resizeCanvas();
+
+        let connectionRadius = 150;
+        let connectionRadiusSq = connectionRadius * connectionRadius;
+        let mouseInteractionRadius = 220;
+        let mouseInteractionRadiusSq = mouseInteractionRadius * mouseInteractionRadius;
+        let connDivisor = 500;
+
         const mouse = { x: -9999, y: -9999 };
         let needsResize = false;
-        let animationId: number;
-
-        const resizeObserver = new ResizeObserver(() => {
-            needsResize = true;
-        });
-        resizeObserver.observe(container);
-
-        const updateMousePosition = (e: MouseEvent | TouchEvent) => {
-            const target = e.target as HTMLElement;
-            const isInteractiveElement = target.closest('a, button, img, .pointer-events-auto') !== null;
-            
-            if (isInteractiveElement) {
-                mouse.x = -9999;
-                mouse.y = -9999;
-            } else {
-                const rect = container.getBoundingClientRect();
-                let clientX, clientY;
-                
-                if ('touches' in e) {
-                    clientX = e.touches[0].clientX;
-                    clientY = e.touches[0].clientY;
-                } else {
-                    clientX = (e as MouseEvent).clientX;
-                    clientY = (e as MouseEvent).clientY;
-                }
-
-                mouse.x = clientX - rect.left;
-                mouse.y = clientY - rect.top;
-            }
-        };
-
-        const resetMousePosition = () => {
-            mouse.x = -9999;
-            mouse.y = -9999;
-        };
-
-        container.addEventListener('mousemove', updateMousePosition as EventListener);
-        container.addEventListener('mouseleave', resetMousePosition);
-        container.addEventListener('touchstart', updateMousePosition as EventListener, { passive: true });
-        container.addEventListener('touchmove', updateMousePosition as EventListener, { passive: true });
-        container.addEventListener('touchend', resetMousePosition);
+        let animationId: number | null = null;
 
         class Particle {
             x: number;
@@ -117,9 +98,9 @@ const cvUrl = lang === 'es' ? '/[ES]CV_Iago_Fernandez.pdf' : '/[EN]CV_Iago_Ferna
             vy: number;
             size: number;
 
-            constructor(isNew = false) {
-                this.x = isNew ? Math.random() * width : Math.random() * (container.offsetWidth || 1000);
-                this.y = isNew ? Math.random() * height : Math.random() * (container.offsetHeight || 1000);
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
                 this.vx = (Math.random() - 0.5) * 0.6;
                 this.vy = (Math.random() - 0.5) * 0.6;
                 this.size = Math.random() * 2.5 + 1;
@@ -128,119 +109,192 @@ const cvUrl = lang === 'es' ? '/[ES]CV_Iago_Fernandez.pdf' : '/[EN]CV_Iago_Ferna
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                
+
                 const dxMouse = mouse.x - this.x;
                 const dyMouse = mouse.y - this.y;
-                const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
-                
-                if (distMouse < 200 && distMouse > 0) {
-                    const force = (200 - distMouse) / 200;
+                const distSq = dxMouse * dxMouse + dyMouse * dyMouse;
+
+                if (distSq > 0 && distSq < mouseInteractionRadiusSq) {
+                    const distMouse = Math.sqrt(distSq);
+                    const force = (mouseInteractionRadius - distMouse) / mouseInteractionRadius;
                     this.x -= (dxMouse / distMouse) * force * 3.5;
                     this.y -= (dyMouse / distMouse) * force * 3.5;
                 }
 
-                if (this.x < 0) { this.x = 0; this.vx *= -1; } 
-                else if (this.x > width) { this.x = width; this.vx *= -1; }
-                if (this.y < 0) { this.y = 0; this.vy *= -1; } 
-                else if (this.y > height) { this.y = height; this.vy *= -1; }
-            }
+                if (this.x < 0) {
+                    this.x = 0;
+                    this.vx *= -1;
+                } else if (this.x > width) {
+                    this.x = width;
+                    this.vx *= -1;
+                }
 
-            draw() {
-                if (!ctx) return;
-                const isDark = document.documentElement.classList.contains('dark');
-                ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.45)' : 'rgba(37, 99, 235, 0.45)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                if (this.y < 0) {
+                    this.y = 0;
+                    this.vy *= -1;
+                } else if (this.y > height) {
+                    this.y = height;
+                    this.vy *= -1;
+                }
             }
         }
 
-        let connectionRadius = 150;
-        let mouseInteractionRadius = 220;
-        let connDivisor = 500;
-        let mouseDivisor = 550;
+        let particles: Particle[] = [];
 
         const updateCanvasConfiguration = () => {
             const currentWidth = window.innerWidth;
             const currentHeight = container.offsetHeight;
             const area = currentWidth * currentHeight;
-            
+
             const targetCount = Math.max(50, Math.floor(area * 0.00010));
             const scale = Math.max(0.6, Math.min(1, currentWidth / 1200));
-            
+
             connectionRadius = 150 * scale;
+            connectionRadiusSq = connectionRadius * connectionRadius;
             mouseInteractionRadius = 220 * scale;
+            mouseInteractionRadiusSq = mouseInteractionRadius * mouseInteractionRadius;
             connDivisor = 500 * scale;
-            mouseDivisor = 550 * scale;
 
             if (particles.length > targetCount) {
                 particles.splice(targetCount);
             }
             while (particles.length < targetCount) {
-                particles.push(new Particle(true));
+                particles.push(new Particle());
             }
         };
 
         updateCanvasConfiguration();
 
-        const animate = () => {
-            if (!ctx) return;
-
-            if (needsResize) {
-                width = container.offsetWidth;
-                height = container.offsetHeight;
-                canvas.width = width;
-                canvas.height = height;
-
-                updateCanvasConfiguration();
-
-                particles.forEach(p => {
-                    if (p.x > width) p.x = Math.random() * width;
-                    if (p.y > height) p.y = Math.random() * height;
-                });
-
-                needsResize = false;
-            }
-
+        const renderFrame = (shouldUpdate: boolean) => {
             ctx.clearRect(0, 0, width, height);
             const isDark = document.documentElement.classList.contains('dark');
-            
+            ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.45)' : 'rgba(37, 99, 235, 0.45)';
+            ctx.lineWidth = isDark ? 1.0 : 1.5;
+
             for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+                const p = particles[i];
+                if (shouldUpdate) {
+                    p.update();
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
 
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const q = particles[j];
+                    const dx = p.x - q.x;
+                    const dy = p.y - q.y;
+                    const distSq = dx * dx + dy * dy;
 
-                    if (distance < connectionRadius) {
+                    if (distSq < connectionRadiusSq) {
+                        const distance = Math.sqrt(distSq);
                         const alpha = Math.max(0, 0.35 - (distance / connDivisor));
-                        ctx.strokeStyle = isDark ? `rgba(96, 165, 250, ${alpha * 0.8})` : `rgba(37, 99, 235, ${alpha})`;
-                        ctx.lineWidth = isDark ? 1.0 : 1.5;
+                        ctx.strokeStyle = isDark
+                            ? `rgba(96, 165, 250, ${alpha * 0.8})`
+                            : `rgba(37, 99, 235, ${alpha})`;
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(q.x, q.y);
                         ctx.stroke();
                     }
                 }
             }
-            animationId = requestAnimationFrame(animate);
-        }
-        animate();
-        
-        document.addEventListener('astro:before-swap', () => {
-            cancelAnimationFrame(animationId);
-            resizeObserver.disconnect();
-            particles = [];
-            
-            if (container) {
-                container.removeEventListener('mousemove', updateMousePosition as EventListener);
-                container.removeEventListener('mouseleave', resetMousePosition);
-                container.removeEventListener('touchstart', updateMousePosition as EventListener);
-                container.removeEventListener('touchmove', updateMousePosition as EventListener);
-                container.removeEventListener('touchend', resetMousePosition);
+        };
+
+        const applyResize = () => {
+            resizeCanvas();
+            updateCanvasConfiguration();
+
+            particles.forEach((p) => {
+                if (p.x > width) p.x = Math.random() * width;
+                if (p.y > height) p.y = Math.random() * height;
+            });
+
+            needsResize = false;
+        };
+
+        const resizeObserver = new ResizeObserver(() => {
+            if (prefersReducedMotion) {
+                applyResize();
+                renderFrame(false);
+            } else {
+                needsResize = true;
             }
+        });
+        resizeObserver.observe(container);
+
+        const resetMousePosition = () => {
+            mouse.x = -9999;
+            mouse.y = -9999;
+        };
+
+        const setPointerFromClient = (target: EventTarget | null, clientX: number, clientY: number) => {
+            const element = target instanceof HTMLElement ? target : null;
+            if (element && element.closest('a, button, img, .pointer-events-auto') !== null) {
+                resetMousePosition();
+                return;
+            }
+
+            const rect = container.getBoundingClientRect();
+            mouse.x = clientX - rect.left;
+            mouse.y = clientY - rect.top;
+        };
+
+        const stopAnimation = () => {
+            if (animationId !== null) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        };
+
+        const animate = () => {
+            if (document.hidden) {
+                animationId = null;
+                return;
+            }
+
+            if (needsResize) {
+                applyResize();
+            }
+
+            renderFrame(true);
+            animationId = requestAnimationFrame(animate);
+        };
+
+        if (prefersReducedMotion) {
+            renderFrame(false);
+        } else {
+            container.addEventListener('mousemove', (e: MouseEvent) => {
+                setPointerFromClient(e.target, e.clientX, e.clientY);
+            }, { signal });
+            container.addEventListener('mouseleave', resetMousePosition, { signal });
+
+            const handleTouch = (e: TouchEvent) => {
+                if (e.touches.length === 0) return;
+                setPointerFromClient(e.target, e.touches[0].clientX, e.touches[0].clientY);
+            };
+            container.addEventListener('touchstart', handleTouch, { passive: true, signal });
+            container.addEventListener('touchmove', handleTouch, { passive: true, signal });
+            container.addEventListener('touchend', resetMousePosition, { signal });
+
+            // Pause the animation loop while the tab is hidden to avoid background CPU usage.
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAnimation();
+                } else if (animationId === null) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }, { signal });
+
+            animate();
+        }
+
+        document.addEventListener('astro:before-swap', () => {
+            stopAnimation();
+            resizeObserver.disconnect();
+            controller.abort();
+            particles = [];
         }, { once: true });
     });
 </script>
