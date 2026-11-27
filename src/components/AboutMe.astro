@@ -185,20 +185,29 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
 
 <script>
     document.addEventListener('astro:page-load', () => {
-        const wrappers = document.querySelectorAll('.carousel-wrapper');
+        const wrappers = document.querySelectorAll<HTMLElement>('.carousel-wrapper');
         if (wrappers.length === 0) return;
 
         const pageController = new AbortController();
-        document.addEventListener('astro:before-swap', () => pageController.abort(), { once: true });
+        const { signal } = pageController;
+        const animations: Animation[] = [];
+        const cleanups: Array<() => void> = [];
 
-        const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+        document.addEventListener('astro:before-swap', () => {
+            pageController.abort();
+            animations.forEach((anim) => anim.cancel());
+            cleanups.forEach((cleanup) => cleanup());
+        }, { once: true });
 
-        wrappers.forEach(wrapper => {
-            const track = wrapper.querySelector('.animate-carousel-track');
-            const btnLeft = wrapper.querySelector('.btn-left');
-            const btnRight = wrapper.querySelector('.btn-right');
-            const btn = btnLeft || btnRight;
-            
+        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        wrappers.forEach((wrapper) => {
+            if (wrapper.dataset.initialized === 'true') return;
+            wrapper.dataset.initialized = 'true';
+
+            const track = wrapper.querySelector<HTMLElement>('.animate-carousel-track');
+            const btn = wrapper.querySelector<HTMLButtonElement>('.btn-left, .btn-right');
             if (!track) return;
 
             const durationMs = parseInt(track.getAttribute('data-duration') || '70000', 10);
@@ -214,14 +223,36 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 ],
                 { duration: durationMs, iterations: Infinity, easing: 'linear' }
             );
+            animations.push(animation);
+
+            if (prefersReducedMotion) {
+                animation.pause();
+            }
 
             let isHoveringContainer = false;
             let isAccelerating = false;
-            let hoveredIcon = null;
+            let hoveredIcon: Element | null = null;
+            let hoverRafId: number | null = null;
+
+            const clearHoveredIcon = () => {
+                if (hoveredIcon) {
+                    hoveredIcon.classList.remove('is-hovered');
+                    hoveredIcon = null;
+                }
+            };
 
             const syncAnimation = () => {
+                if (prefersReducedMotion) {
+                    if (isAccelerating) {
+                        animation.playbackRate = 4.0;
+                        animation.play();
+                    } else {
+                        animation.pause();
+                    }
+                    return;
+                }
+
                 let targetRate = 1.0;
-                
                 if (isAccelerating) targetRate = 4.0;
                 else if (isHoveringContainer) targetRate = 0.5;
 
@@ -230,16 +261,117 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                 }
             };
 
+            const stopHoverTracking = () => {
+                if (hoverRafId !== null) {
+                    cancelAnimationFrame(hoverRafId);
+                    hoverRafId = null;
+                }
+                clearHoveredIcon();
+            };
+
+            let startHoverTracking = () => {};
+
+            if (!isTouchDevice) {
+                let localMouseX = -100;
+                let localMouseY = -100;
+
+                // Poll hit-testing only while hovered because WAAPI transforms move cards under a stationary cursor.
+                const tick = () => {
+                    if (!wrapper.isConnected || !isHoveringContainer || isAccelerating) {
+                        stopHoverTracking();
+                        return;
+                    }
+
+                    let currentHover: Element | null = null;
+                    const topEls = document.elementsFromPoint(localMouseX, localMouseY);
+                    for (const el of topEls) {
+                        if (el.tagName === 'BUTTON' || el.closest('button')) break;
+                        if (el.classList.contains('icon-card')) {
+                            currentHover = el;
+                            break;
+                        }
+                    }
+
+                    if (hoveredIcon && hoveredIcon !== currentHover) {
+                        hoveredIcon.classList.remove('is-hovered');
+                    }
+
+                    hoveredIcon = currentHover;
+                    if (hoveredIcon) {
+                        hoveredIcon.classList.add('is-hovered');
+                    }
+
+                    hoverRafId = requestAnimationFrame(tick);
+                };
+
+                startHoverTracking = () => {
+                    if (hoverRafId === null && isHoveringContainer && !isAccelerating) {
+                        hoverRafId = requestAnimationFrame(tick);
+                    }
+                };
+
+                cleanups.push(stopHoverTracking);
+
+                wrapper.addEventListener('pointermove', (e: PointerEvent) => {
+                    localMouseX = e.clientX;
+                    localMouseY = e.clientY;
+                }, { signal });
+
+                wrapper.addEventListener('pointerenter', (e: PointerEvent) => {
+                    localMouseX = e.clientX;
+                    localMouseY = e.clientY;
+                    isHoveringContainer = true;
+                    syncAnimation();
+                    startHoverTracking();
+                }, { signal });
+
+                wrapper.addEventListener('pointerleave', () => {
+                    isHoveringContainer = false;
+                    syncAnimation();
+                    stopHoverTracking();
+                }, { signal });
+            } else {
+                const icons = Array.from(track.querySelectorAll<HTMLElement>('.icon-card'));
+                let touchClearTimer: number | undefined;
+
+                const clearTouchTimer = () => {
+                    if (touchClearTimer !== undefined) {
+                        window.clearTimeout(touchClearTimer);
+                        touchClearTimer = undefined;
+                    }
+                };
+                cleanups.push(clearTouchTimer);
+
+                icons.forEach((icon) => {
+                    icon.addEventListener('pointerdown', (e: PointerEvent) => {
+                        e.stopPropagation();
+                        clearTouchTimer();
+                        icons.forEach((c) => c.classList.remove('is-hovered'));
+                        icon.classList.add('is-hovered');
+                        touchClearTimer = window.setTimeout(() => {
+                            icon.classList.remove('is-hovered');
+                            touchClearTimer = undefined;
+                        }, 2500);
+                    }, { signal });
+                });
+
+                document.addEventListener('pointerdown', () => {
+                    clearTouchTimer();
+                    icons.forEach((c) => c.classList.remove('is-hovered'));
+                }, { signal });
+            }
+
             if (btn) {
-                btn.addEventListener('pointerdown', (e) => {
+                btn.addEventListener('pointerdown', (e: PointerEvent) => {
                     if (e.pointerType === 'mouse' && e.button !== 0) return;
                     btn.setPointerCapture(e.pointerId);
                     isAccelerating = true;
                     btn.classList.add('is-pressed');
+                    stopHoverTracking();
                     syncAnimation();
-                });
+                }, { signal });
 
-                const releasePointer = (e) => {
+                const releasePointer = (e: PointerEvent) => {
                     if (btn.hasPointerCapture(e.pointerId)) {
                         btn.releasePointerCapture(e.pointerId);
                     }
@@ -247,72 +379,12 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
                     isAccelerating = false;
                     btn.classList.remove('is-pressed');
                     syncAnimation();
+                    startHoverTracking();
                 };
 
-                btn.addEventListener('pointerup', releasePointer);
-                btn.addEventListener('pointercancel', releasePointer);
-                btn.addEventListener('contextmenu', e => e.preventDefault());
-            }
-
-            if (!isTouchDevice) {
-                let localMouseX = -100;
-                let localMouseY = -100;
-
-                wrapper.addEventListener('pointermove', (e) => {
-                    localMouseX = e.clientX;
-                    localMouseY = e.clientY;
-                });
-
-                wrapper.addEventListener('pointerenter', () => {
-                    isHoveringContainer = true;
-                    syncAnimation();
-                });
-                
-                wrapper.addEventListener('pointerleave', () => {
-                    isHoveringContainer = false;
-                    syncAnimation();
-                });
-
-                const tick = () => {
-                    if (!wrapper.isConnected) return;
-
-                    let currentHover = null;
-                    if (isHoveringContainer && !isAccelerating) {
-                        const topEls = document.elementsFromPoint(localMouseX, localMouseY);
-                        for (let el of topEls) {
-                            if (el.tagName === 'BUTTON' || el.closest('button')) break;
-                            if (el.classList.contains('icon-card')) {
-                                currentHover = el;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (hoveredIcon && hoveredIcon !== currentHover) {
-                        hoveredIcon.classList.remove('is-hovered');
-                    }
-                    
-                    hoveredIcon = currentHover;
-                    if (hoveredIcon) {
-                        hoveredIcon.classList.add('is-hovered');
-                    }
-
-                    requestAnimationFrame(tick);
-                };
-                requestAnimationFrame(tick);
-            } else {
-                const icons = Array.from(track.querySelectorAll('.icon-card'));
-                icons.forEach(icon => {
-                    icon.addEventListener('pointerdown', (e) => {
-                        e.stopPropagation();
-                        icons.forEach(c => c.classList.remove('is-hovered'));
-                        icon.classList.add('is-hovered');
-                        setTimeout(() => icon.classList.remove('is-hovered'), 2500);
-                    });
-                });
-                document.addEventListener('pointerdown', () => {
-                    icons.forEach(c => c.classList.remove('is-hovered'));
-                }, { signal: pageController.signal });
+                btn.addEventListener('pointerup', releasePointer, { signal });
+                btn.addEventListener('pointercancel', releasePointer, { signal });
+                btn.addEventListener('contextmenu', (e: MouseEvent) => e.preventDefault(), { signal });
             }
         });
     });
@@ -397,39 +469,37 @@ const duplicatedExtra = [...additionalTech, ...additionalTech, ...additionalTech
         transform: scale(1.2) !important;
     }
 
-    @media (prefers-color-scheme: dark) {
-        .icon-card.is-hovered .icon-mask {
-            background-color: rgb(96, 165, 250) !important;
+    :global(.dark) .icon-card.is-hovered .icon-mask {
+        background-color: rgb(96, 165, 250) !important;
+    }
+
+    :global(.dark) .action-btn svg {
+        color: #71717a;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        :global(.dark) .action-btn:hover.btn-left {
+            background-image: linear-gradient(to right, rgba(30, 58, 138, 0.4), transparent) !important;
         }
 
-        .action-btn svg {
-            color: #71717a; 
+        :global(.dark) .action-btn:hover.btn-right {
+            background-image: linear-gradient(to left, rgba(30, 58, 138, 0.4), transparent) !important;
         }
 
-        @media (hover: hover) and (pointer: fine) {
-            .action-btn:hover.btn-left {
-                background-image: linear-gradient(to right, rgba(30, 58, 138, 0.4), transparent) !important;
-            }
-            
-            .action-btn:hover.btn-right {
-                background-image: linear-gradient(to left, rgba(30, 58, 138, 0.4), transparent) !important;
-            }
+        :global(.dark) .action-btn:hover svg {
+            color: #60a5fa !important;
+        }
+    }
 
-            .action-btn:hover svg {
-                color: #60a5fa !important; 
-            }
-        }
+    :global(.dark) .action-btn.is-pressed.btn-left {
+        background-image: linear-gradient(to right, rgba(30, 58, 138, 0.7), transparent) !important;
+    }
 
-        .action-btn.is-pressed.btn-left {
-            background-image: linear-gradient(to right, rgba(30, 58, 138, 0.7), transparent) !important;
-        }
-        
-        .action-btn.is-pressed.btn-right {
-            background-image: linear-gradient(to left, rgba(30, 58, 138, 0.7), transparent) !important;
-        }
+    :global(.dark) .action-btn.is-pressed.btn-right {
+        background-image: linear-gradient(to left, rgba(30, 58, 138, 0.7), transparent) !important;
+    }
 
-        .action-btn.is-pressed svg {
-            color: #3b82f6 !important; 
-        }
+    :global(.dark) .action-btn.is-pressed svg {
+        color: #3b82f6 !important;
     }
 </style>

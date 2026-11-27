@@ -93,9 +93,59 @@ const t = useTranslations(lang);
 </section>
 
 <script>
+    interface TurnstileRenderOptions {
+        sitekey: string;
+        theme?: 'light' | 'dark' | 'auto';
+        language?: string;
+        callback: (token: string) => void;
+        'error-callback': () => void;
+        'expired-callback': () => void;
+    }
+
+    interface TurnstileAPI {
+        ready?: (callback: () => void) => void;
+        render: (container: HTMLElement, options: TurnstileRenderOptions) => string | null | undefined;
+        reset: (widgetId: string) => void;
+        remove: (widgetId: string) => void;
+    }
+
+    interface WindowWithTurnstile extends Window {
+        turnstile?: TurnstileAPI;
+    }
+
+    const TURNSTILE_SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
+    // Load Turnstile once across ClientRouter swaps so non-contact pages stay script-free.
+    const ensureTurnstileLoaded = (onLoad: () => void, onError: () => void) => {
+        const win = window as WindowWithTurnstile;
+        if (win.turnstile) {
+            onLoad();
+            return;
+        }
+
+        const existing = document.querySelector<HTMLScriptElement>('script[data-turnstile-script]');
+        if (existing) {
+            existing.addEventListener('load', onLoad, { once: true });
+            existing.addEventListener('error', onError, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = TURNSTILE_SCRIPT_SRC;
+        script.async = true;
+        script.defer = true;
+        script.dataset.turnstileScript = 'true';
+        script.addEventListener('load', onLoad, { once: true });
+        script.addEventListener('error', () => {
+            script.remove();
+            onError();
+        }, { once: true });
+        document.head.appendChild(script);
+    };
+
     document.addEventListener('astro:page-load', () => {
-        const form = document.getElementById('contact-form') as HTMLFormElement;
-        const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+        const form = document.getElementById('contact-form') as HTMLFormElement | null;
+        const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
         const btnText = document.getElementById('btn-text');
         const btnSpinner = document.getElementById('btn-spinner');
         const formStatus = document.getElementById('form-status');
@@ -106,6 +156,7 @@ const t = useTranslations(lang);
         if (form.dataset.initialized === 'true') return;
         form.dataset.initialized = 'true';
 
+        const win = window as WindowWithTurnstile;
         const msgs = {
             success: form.dataset.msgSuccess || '',
             errorEmail: form.dataset.msgErrorEmail || '',
@@ -115,14 +166,16 @@ const t = useTranslations(lang);
             errorGeneral: form.dataset.msgErrorGeneral || ''
         };
 
-        let turnstileId: any;
+        let turnstileId: string | null | undefined;
         let isSubmitting = false;
         let currentToken: string | null = null;
+        // Prevent rendering into a detached container if navigation occurs while the script loads.
+        let disposed = false;
 
         const updateStatus = (type: 'success' | 'error', message: string) => {
             formStatus.textContent = message;
-            formStatus.className = 'rounded-md py-3 px-4 text-xs sm:text-sm font-bold text-center whitespace-nowrap transition-all duration-300 ' + 
-                (type === 'success' 
+            formStatus.className = 'rounded-md py-3 px-4 text-xs sm:text-sm font-bold text-center text-balance transition-all duration-300 ' +
+                (type === 'success'
                     ? 'bg-green-50 text-green-800 border border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800'
                     : 'bg-red-50 text-red-800 border border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800');
             formStatus.classList.remove('hidden');
@@ -142,9 +195,14 @@ const t = useTranslations(lang);
         };
 
         const renderWidget = () => {
-            if ((window as any).turnstile && turnstileId === undefined) {
-                turnstileId = (window as any).turnstile.render(turnstileWidget, {
+            if (disposed || !win.turnstile || turnstileId) return;
+
+            const mount = () => {
+                if (disposed || !win.turnstile || turnstileId) return;
+                turnstileId = win.turnstile.render(turnstileWidget, {
                     sitekey: '0x4AAAAAACqH2g4WiqJ-5q1M',
+                    theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+                    language: document.documentElement.lang || 'en',
                     callback: (token: string) => {
                         currentToken = token;
                     },
@@ -154,39 +212,43 @@ const t = useTranslations(lang);
                     },
                     'expired-callback': () => {
                         currentToken = null;
-                        if ((window as any).turnstile && turnstileId !== undefined) {
-                            (window as any).turnstile.reset(turnstileId);
+                        if (win.turnstile && turnstileId) {
+                            win.turnstile.reset(turnstileId);
                         }
                     }
                 });
+            };
+
+            if (win.turnstile.ready) {
+                win.turnstile.ready(mount);
+            } else {
+                mount();
             }
         };
 
-        let attempts = 0;
-        const checkTurnstile = setInterval(() => {
-            if ((window as any).turnstile) {
-                clearInterval(checkTurnstile);
-                renderWidget();
+        ensureTurnstileLoaded(renderWidget, () => {
+            if (!disposed) {
+                updateStatus('error', msgs.errorServer);
             }
-            if (attempts++ > 50) clearInterval(checkTurnstile);
-        }, 100);
+        });
 
         document.addEventListener('astro:before-swap', () => {
-            if ((window as any).turnstile && turnstileId !== undefined) {
-                (window as any).turnstile.remove(turnstileId);
+            disposed = true;
+            if (win.turnstile && turnstileId) {
+                win.turnstile.remove(turnstileId);
                 turnstileId = undefined;
             }
         }, { once: true });
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             if (isSubmitting) return;
 
             if (!form.checkValidity()) {
-                const emailInput = document.getElementById('email') as HTMLInputElement;
-                const msg = !emailInput.validity.valid 
-                    ? msgs.errorEmail 
+                const emailInput = document.getElementById('email') as HTMLInputElement | null;
+                const msg = emailInput && !emailInput.validity.valid
+                    ? msgs.errorEmail
                     : msgs.errorFields;
                 updateStatus('error', msg);
                 return;
@@ -196,7 +258,7 @@ const t = useTranslations(lang);
                 updateStatus('error', msgs.errorTurnstile);
                 return;
             }
-            
+
             toggleLoading(true);
 
             const formData = new FormData(form);
@@ -212,15 +274,15 @@ const t = useTranslations(lang);
                     updateStatus('success', msgs.success);
                     form.reset();
                 } else {
-                    throw new Error('Server rejected request');
+                    updateStatus('error', msgs.errorGeneral);
                 }
-            } catch (error) {
+            } catch {
                 updateStatus('error', msgs.errorGeneral);
             } finally {
                 toggleLoading(false);
                 currentToken = null;
-                if ((window as any).turnstile && turnstileId !== undefined) {
-                    (window as any).turnstile.reset(turnstileId);
+                if (win.turnstile && turnstileId) {
+                    win.turnstile.reset(turnstileId);
                 }
             }
         });
