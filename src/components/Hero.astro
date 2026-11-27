@@ -22,12 +22,12 @@ const cvUrl = lang === 'es' ? '/[ES]CV_Iago_Fernandez.pdf' : '/[EN]CV_Iago_Ferna
                 <h2 class="mt-4 text-xl font-semibold text-zinc-700 dark:text-zinc-300 sm:text-2xl xl:text-3xl transition-colors duration-300">
                     {t('hero.subtitle')}
                 </h2>
-                <div class="mt-6 max-w-3xl animation-delay-200">
+                <div class="mt-6 max-w-3xl">
                     <p class="text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg transition-colors duration-300 text-pretty">
                         {t('hero.description')}
                     </p>
                 </div>
-                <div class="mt-10 flex flex-col sm:flex-row gap-4 animation-delay-400 w-full sm:w-auto">
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                     <a href={cvUrl} target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto items-center justify-center rounded-md bg-zinc-900 px-6 py-3 text-sm font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 hover:shadow-lg active:translate-y-0">
                         {t('hero.cv')}
                     </a>
@@ -42,7 +42,7 @@ const cvUrl = lang === 'es' ? '/[ES]CV_Iago_Fernandez.pdf' : '/[EN]CV_Iago_Ferna
                 </div>
             </div>
             
-            <div class="order-1 flex justify-center animate-fade-in-up animation-delay-200 lg:order-2 lg:col-span-5 xl:col-span-4 lg:justify-end pointer-events-none">
+            <div class="order-1 flex justify-center lg:order-2 lg:col-span-5 xl:col-span-4 lg:justify-end pointer-events-none">
                 <div class="pointer-events-auto relative flex h-56 w-56 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white dark:border-zinc-700 bg-white dark:bg-zinc-700 shadow-md transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-900/20 dark:hover:shadow-blue-500/10 sm:h-72 sm:w-72 lg:h-80 lg:w-80">
                     <Image src={profileImage} alt="Iago Fernandez" class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105" loading="eager" width={320} height={320}/>
                 </div>
