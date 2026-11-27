@@ -274,7 +274,7 @@ const t = useTranslations(lang);
                     updateStatus('success', msgs.success);
                     form.reset();
                 } else {
-                    throw new Error('Server rejected request');
+                    updateStatus('error', msgs.errorGeneral);
                 }
             } catch {
                 updateStatus('error', msgs.errorGeneral);
